@@ -151,3 +151,38 @@ button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:i
  .contact-qrs figure{width:90px}.contact-qrs figcaption{font-size:11px;color:#f0f0f0;font-weight:300}
  .contact-line{margin:8px 0}
 }
+
+/* Phone scroll scenes retain readable content and the desktop progression. */
+@media(max-width:700px){
+ #live>.mobile-content,#capabilities>.mobile-content{height:100%}
+ #live{height:calc(100svh * 5)!important;padding:0 22px}
+ .mobile-live-pin{position:sticky;top:64px;height:calc(100svh - 64px);overflow:hidden;padding-top:22px;box-sizing:border-box}
+ .mobile-live-pin .section-kicker{margin-bottom:22px}
+ .mobile-phones{scroll-snap-type:none;scrollbar-width:none;padding-bottom:0;overflow-x:auto}
+ .mobile-phones::-webkit-scrollbar{display:none}
+ .mobile-phones>a{flex-basis:76%}
+ .mobile-device{position:relative;width:min(100%,calc((100svh - 380px)*.473684));margin:auto}
+ #muton-storyboard .mobile-device>.stage-screen-media{position:static;height:auto;aspect-ratio:9/19}
+ .mobile-phones h3{font-size:18px;line-height:1.4;margin:14px 0 6px}
+ .mobile-phones p{font-size:12px;line-height:1.6;margin:0}
+ .mobile-live-pin .outline-link{margin:20px auto 0}
+ .mobile-behind{position:absolute;inset:0;background:#0000f0;margin:0;display:flex;align-items:center;justify-content:center;padding:20px;font-size:16vw;pointer-events:none;z-index:2}
+ #capabilities{height:calc(100svh * 4)!important;overflow:visible;padding:0 22px}
+ .mobile-capability-pin{position:sticky;top:64px;height:calc(100svh - 64px);overflow:hidden;padding-top:28px}
+ .mobile-capability-pin>h2{position:relative;z-index:1}
+ .mobile-capability-pin .mobile-pi{top:14%;left:-8%;font-size:140vw}
+ .mobile-capability-pin .mobile-capability{position:absolute;left:0;right:0;top:34%;margin:0;padding:0 8px}
+ .mobile-capability-pin .mobile-capability:nth-last-child(2){padding-left:12%}
+ .mobile-capability h3{font-size:28px;line-height:1.55}
+ [data-media-state="error"]{cursor:pointer;background:#101018;outline:1px solid #30303b}
+ .mobile-work{will-change:transform,opacity}
+}
+@media(max-width:700px) and (prefers-reduced-motion:reduce){
+ #live,#capabilities{height:auto!important;padding:52px 22px}
+ .mobile-live-pin,.mobile-capability-pin{position:relative;top:auto;height:auto;padding:0;overflow:visible}
+ .mobile-behind{position:relative;inset:auto;display:block;margin:60px -22px -52px;padding:55px 22px}
+ .mobile-capability-pin .mobile-capability{position:relative;top:auto;margin-top:140px}
+}
+
+#muton-storyboard #top .home-scene{background:#000 url('assets/web/hero-phone-poster.webp') center / cover no-repeat}
+#muton-storyboard #muton-hero-motion:not([data-started]){opacity:0}
