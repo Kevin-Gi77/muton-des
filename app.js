@@ -128,7 +128,8 @@ const text=(x,y,s,size=24,fill=W,extra='')=>`<text x="${x}" y="${y}" fill="${fil
 const lines=(x,y,arr,size=24,fill=W,gap=size*1.45,extra='')=>arr.map((s,i)=>text(x,y+i*gap,s,size,fill,extra)).join('');
 const btn=(x,y,label,w=240)=>rect(x,y,w,44,'#6af03e','rx="4"')+text(x+w/2,y+29,label,15,'#000','font-weight="700" text-anchor="middle"');
 function brandLogo(x,y,width,black=false){
- return `<svg x="${x}" y="${y}" width="${width}" height="${width*148/1207}" viewBox="0 0 1207 148" overflow="hidden" role="img" aria-label="MUTON 品牌 Logo" data-brand-logo="${black?'loading':'navigation'}"><image href="${brandLogoData}" width="1207" height="148" style="filter:${black?'brightness(0)':'none'}"/></svg>`;
+ const image=`<image href="${brandLogoData}" width="1207" height="148"/>`;
+ return `<svg x="${x}" y="${y}" width="${width}" height="${width*148/1207}" viewBox="0 0 1207 148" overflow="hidden" role="img" aria-label="MUTON 品牌 Logo" data-brand-logo="${black?'loading':'navigation'}">${black?`<defs><mask id="loading-brand-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1207" height="148">${image}</mask></defs><rect width="1207" height="148" fill="#000" mask="url(#loading-brand-mask)"/>`:image}</svg>`;
 }
 function navArtwork(){return rect(0,0,1920,60,'#000')+brandLogo(38,18,198)+text(270,38,'｜ 聊聊合作',18,W)+text(380,39,'↘',24,G,'data-cooperation-arrow="true"')+['项目','直播','菜单'].map((n,i)=>rect(1580+i*106,13,94,35,'#000',`rx="4" stroke="${G}"`)+text(1627+i*106,37,n,17,G,'text-anchor="middle"')).join('');}
 function nav(){return '';}
@@ -386,7 +387,12 @@ function updateCapabilityScene(art,progress){
  art.querySelectorAll('[data-capability]').forEach((node,i)=>{const y=[1230,1990,2700][i]-scroll;node.setAttribute('transform',`translate(${[180,1030,180][i]} ${y})`);const alpha=ease(clamp((1080-y)/200))*ease(clamp((y+240)/220));node.setAttribute('opacity',alpha);node.style.pointerEvents=alpha>0?'auto':'none';node.querySelector('a').setAttribute('tabindex',alpha>0?'0':'-1');});
 }
 function draw(){
- if(chapter===2){
+ if(chapter===1){
+  if(!svg.querySelector('#m-logo-matrix'))svg.innerHTML=defs()+service();
+  const count=Math.floor(clamp(p/.48)*12),reveal=ease(clamp((p-.54)/.36));
+  svg.querySelectorAll('[data-service-title] tspan').forEach((span,i)=>span.setAttribute('opacity',i<count?1:0));
+  const logos=svg.querySelector('#m-logo-matrix');logos.setAttribute('opacity',reveal);logos.setAttribute('transform',`translate(0 ${(1-reveal)*110})`);logos.style.pointerEvents=reveal>.95?'auto':'none';
+ }else if(chapter===2){
   if(!svg.querySelector('[data-detail-work]'))svg.innerHTML=defs()+works();
   advanceWorkFlow();
  }else if(chapter===6){
@@ -394,7 +400,15 @@ function draw(){
   if(svg.dataset.footer!==String(exiting)||!svg.querySelector('[data-pi]')){svg.innerHTML=defs()+capabilities();svg.dataset.footer=String(exiting);}
   if(exiting)svg.querySelector('[data-footer-foreground]').setAttribute('transform',`translate(0 ${-clamp((p-.88)/.12)*1080})`);
   else updateCapabilityScene(svg,p);
- }else svg.innerHTML=defs()+draws[chapter]();
+ }else{
+  const next=document.createElementNS('http://www.w3.org/2000/svg','svg');next.innerHTML=defs()+draws[chapter]();
+  // Keep typed text and the transition portrait alive across animation frames.
+  svg.querySelectorAll('[data-typewriter],[data-about-portrait]').forEach(node=>{
+   const selector=node.hasAttribute('data-typewriter')?`[data-typewriter="${node.dataset.typewriter}"]`:'[data-about-portrait]';
+   next.querySelector(selector)?.replaceWith(node);
+  });
+  svg.replaceChildren(...next.childNodes);
+ }
  if(chapter===3)positionPhones();
  projectEntries();
 }
@@ -1143,7 +1157,7 @@ const skip=document.createElement('a');skip.className='skip-link';skip.href='#/h
 // Mobile reflows the same confirmed content; desktop keeps the original compositions.
 const mobileBody=(i)=>{
  if(i===0)return `<div class="mobile-hero-copy"><h1>从品牌识别<br>到商业现场。</h1><p>陈其林<br>品牌视觉 Design Lead</p><p>用系统建立识别，用创意连接业务。<br>从关键视觉主创，到团队与项目统筹。</p><a href="#/home/works">探索我的作品 ↘</a></div>`;
- if(i===1)return `<p class="section-kicker">{ REAL SERVICE }</p><h2>Let design take place within<br>real-world business operations.</h2><h2>让设计发生在<br>真实业务里面</h2><div class="mobile-logos">${content.logos.map((a,i)=>`<svg viewBox="${i%8*192} ${Math.floor(i/8)*192} 192 192" role="img" aria-label="${esc(a.label)}"><image data-media-src="${a.src}" width="1536" height="768"/></svg>`).join('')}</div>`;
+ if(i===1)return `<p class="section-kicker">{ REAL SERVICE }</p><h2>${['Let','design','take','place','within','real-world','business','operations.'].map(word=>`<span data-service-word>${word}</span>`).join(' ')}</h2><h2>${['让设计','发生在','真实业务','里面'].map((word,i)=>`${i===2?'<br>':''}<span data-service-word>${word}</span>`).join('')}</h2><div class="mobile-logos">${content.logos.map((a,i)=>`<span class="mobile-logo" role="img" aria-label="${esc(a.label)}"><img data-media-src="${a.src}" alt="" width="1536" height="768" style="left:${-(i%8)*100}%;top:${-Math.floor(i/8)*100}%"></span>`).join('')}</div>`;
  if(i===2)return `<h2 class="section-kicker">{ 我的精选作品 }</h2><div class="mobile-works">${content.featured.map((id,i)=>{const a=projects[id-1];return `<a class="mobile-work" href="#/case/work/${i+1}">${mediaMarkup(a.cover,'data-preview')}<span>${esc(a.tag||a.category)}</span><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p><i aria-hidden="true">↗</i></a>`;}).join('')}</div><a class="outline-link" href="#/projects">SEE ALL PROJECTS →</a>`;
  if(i===3)return `<div class="mobile-live-pin"><h2 class="section-kicker">{ 全场景直播视觉方案 }</h2><div class="mobile-phones">${content.live.map((a,i)=>`<a href="#/case/live/${i+1}"><div class="mobile-device">${mediaMarkup(a.cover,'class="stage-screen-media"')}</div><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p></a>`).join('')}</div><a class="outline-link" href="#/live">SEE ALL LIVE SCENES →</a><div class="mobile-behind">BEHIND<br>THE WORK</div></div>`;
  if(i===4)return `<p class="section-kicker">{ ABOUT ME }</p><img class="mobile-portrait" data-media-src="${content.portrait.src}" alt="陈其林个人照片"><h2>亲自设计<br>也让好的设计<br>持续发生。</h2><p>在品牌策划公司、广告集团与消费品牌甲方积累经验，将品牌识别、内容传播和商业场景连接起来。</p><p>亲自做好关键设计，也让团队的交付持续向前。</p><div class="mobile-stats"><p>2020—2026<small>品牌与商业视觉实践</small></p><p>杭州<small>品牌视觉 · 设计统筹</small></p></div>`;
@@ -1259,6 +1273,11 @@ function syncSectionLinks(){
 }
 function renderMobileMotion(){
  const height=innerHeight;
+ const service=sections[1].section,serviceBox=service.getBoundingClientRect();
+ const serviceProgress=clamp((height*.85-serviceBox.top)/(height*.65));
+ service.querySelectorAll('[data-service-word]').forEach((word,i)=>word.style.opacity=reducedLiveMotion.matches?1:clamp(serviceProgress*14-i));
+ const logos=service.querySelector('.mobile-logos'),logoReveal=reducedLiveMotion.matches?1:ease(clamp((height*.94-serviceBox.top-logos.offsetTop)/(height*.22)));
+ logos.style.opacity=logoReveal;logos.style.transform=`translateY(${(1-logoReveal)*30}px)`;
  root.querySelectorAll('.mobile-work').forEach(card=>{
   const box=card.getBoundingClientRect(),entry=clamp((height-box.top)/(height*.65));
   card.style.transform=reducedLiveMotion.matches?'none':`translateY(${(1-entry)*36-clamp((height*.4-box.top)/height,-1,1)*18}px) scale(${.96+.04*entry})`;
@@ -1362,12 +1381,13 @@ observeMedia();
 new MutationObserver(records=>{
  for(const record of records){
   for(const node of record.addedNodes)if(node.nodeType===1)observeMedia(node);
-  for(const node of record.removedNodes)if(node.nodeType===1)for(const media of [node,...node.querySelectorAll('video,[data-media-src]')]){mediaQueue.delete(media);mediaFinishes.get(media)?.();mediaLoadObserver.unobserve(media);mediaPlaybackObserver.unobserve(media);}
+  for(const node of record.removedNodes)if(node.nodeType===1)for(const media of [node,...node.querySelectorAll('video,[data-media-src]')]){if(media.isConnected)continue;mediaQueue.delete(media);mediaFinishes.get(media)?.();mediaLoadObserver.unobserve(media);mediaPlaybackObserver.unobserve(media);}
  }
 }).observe(root,{childList:true,subtree:true});
-const revealHeroFrame=()=>{if(motion.currentTime>.08&&motion.readyState>=2)motion.dataset.started='true';};
+const revealHeroFrame=()=>{if(motion.currentTime>.08&&motion.readyState>=2){motion.dataset.started='true';sections[0].scene.classList.add('hero-playing');}};
 motion.addEventListener('timeupdate',revealHeroFrame);motion.addEventListener('playing',revealHeroFrame);revealHeroFrame();
 document.addEventListener('WeixinJSBridgeReady',()=>{if(!document.hidden)motion.play().catch(()=>{});});
 root.addEventListener('pointerup',()=>{if(mobile.matches&&!document.hidden){if(sections[0].section.getBoundingClientRect().bottom>0)motion.play().catch(()=>{});root.querySelectorAll('video[data-in-view="true"]').forEach(playVisibleMedia);}},{passive:true});
 document.documentElement.dataset.siteReady='true';
+document.getElementById('muton-initial-loading')?.remove();
 })();
