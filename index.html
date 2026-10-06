@@ -1,0 +1,707 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MUTON.DES · 陈其林 | 品牌视觉 / Design Lead</title><link rel="icon" href="data:,"><style>body{margin:0;padding:16px;background:#181818;color:#eee;font:14px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}.viz-row,.viz-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.btn{background:#282828;border:1px solid #555;border-radius:6px;color:#eee;padding:7px 12px;cursor:pointer}.btn[aria-pressed=true]{background:#0000e0}.form-range{width:100%}.text-small{font-size:12px;color:#aaa}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;vertical-align:top;padding:8px;border-bottom:1px solid #333}.table th{width:24%}</style><script src="content.js"></script><meta name="description" content="陈其林的品牌与商业视觉作品。品牌视觉体系、商业视觉转化、设计统筹管理。"></head><body><div id="muton-storyboard">
+  <div class="viz-row" style="padding-right:96px"><strong>MUTON.DES · 第二阶段素材与文字审阅</strong><span class="text-small">直播二级页可在画面内向下滚动</span></div>
+  <div id="muton-chapters" class="viz-row" aria-label="选择章节" style="margin:12px 0"></div>
+  <div class="muton-product">
+    <video id="muton-hero-motion" poster="assets/hero-still.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true" src="assets/hero-clear.mp4"></video>
+    <svg id="muton-stage" viewBox="0 0 1920 1080" aria-label="首屏"></svg>
+    <div id="muton-live-layer" hidden aria-label="五个直播项目"></div>
+    <button type="button" id="muton-home-entry" class="muton-route-hit cursor-interaction" aria-label="MUTON 品牌 Logo：返回首页动态首屏"></button>
+    <button type="button" id="muton-project-entry" class="muton-route-hit cursor-interaction" aria-label="项目：打开项目索引"><span aria-hidden="true">项目</span></button>
+    <button type="button" id="muton-all-projects" class="muton-route-hit cursor-interaction" aria-label="查看全部案例：打开项目索引" hidden></button>
+    <button type="button" id="muton-all-live" class="muton-route-hit cursor-interaction" aria-label="查看全部直播案例：打开直播二级页" hidden></button>
+    <button type="button" id="muton-contact-entry" class="muton-route-hit cursor-interaction" aria-label="聊聊合作：前往联系页脚"></button>
+    <button type="button" id="muton-live-entry" class="muton-route-hit cursor-interaction" aria-label="直播：打开直播二级页"><span aria-hidden="true">直播</span></button>
+    <button type="button" id="muton-menu-entry" class="muton-route-hit cursor-interaction" aria-label="打开菜单" aria-expanded="false" aria-controls="muton-menu"><span aria-hidden="true">菜单</span></button>
+    <section id="muton-menu" role="dialog" aria-modal="true" aria-label="全站菜单" hidden>
+      <svg id="muton-menu-nav-art" viewBox="0 0 1920 60" role="img" aria-label="MUTON.木木其，聊聊合作，项目，直播，菜单"></svg>
+      <div class="muton-menu-body">
+        <nav class="muton-menu-primary" aria-label="主要页面">
+          <button type="button" data-menu-project class="cursor-interaction"><span>01</span>项目<i>↗</i></button>
+          <button type="button" data-menu-live class="cursor-interaction"><span>02</span>直播视觉<i>↗</i></button>
+          <button type="button" data-menu-chapter="4" class="cursor-interaction"><span>03</span>关于我<i>↗</i></button>
+          <button type="button" data-menu-chapter="6" class="cursor-interaction"><span>04</span>π 型能力<i>↗</i></button>
+          <button type="button" data-menu-chapter="7" class="cursor-interaction"><span>05</span>联系<i>↗</i></button>
+        </nav>
+        <aside class="muton-menu-aside">
+          <p class="menu-identity">陈其林<br><span>品牌视觉 / Design Lead</span></p><img class="menu-portrait" src="assets/78e516cb8f01321dd138.webp" alt="陈其林个人形象">
+          <p>品牌视觉体系<br>商业视觉转化<br>设计统筹管理</p>
+          <nav class="muton-menu-shortcuts" aria-label="首页章节">
+            <button type="button" data-menu-chapter="0" class="cursor-interaction">首页 ↗</button>
+            <button type="button" data-menu-chapter="1" class="cursor-interaction">服务业务 ↗</button>
+            <button type="button" data-menu-chapter="2" class="cursor-interaction">精选作品 ↗</button>
+            <button type="button" data-menu-chapter="5" class="cursor-interaction">工作路径 ↗</button>
+          </nav>
+          <button type="button" data-menu-chapter="7" class="muton-menu-email cursor-interaction">muton2.45@gmail.com ↗</button>
+        </aside>
+      </div>
+      <div class="muton-menu-bottom"><span>从品牌识别，到商业现场。</span><button type="button" id="muton-menu-close" class="cursor-interaction">关闭 ×</button></div>
+    </section>
+    <section id="muton-project-page" aria-label="项目索引" hidden>
+      <div class="muton-project-nav">
+        <svg id="muton-project-nav-art" viewBox="0 0 1920 60" role="img" aria-label="MUTON.木木其，聊聊合作，项目，直播，菜单"></svg>
+      </div>
+      <header class="muton-project-intro">
+        <h2><span aria-hidden="true"></span>项目索引</h2>
+        <div id="muton-project-categories" aria-label="项目分类"></div>
+        <input id="muton-project-search" type="search" placeholder="搜索项目…" aria-label="搜索项目" autocomplete="off">
+      </header>
+      <div class="muton-project-body">
+        <div id="muton-project-list" aria-label="项目列表"></div>
+        <div class="muton-project-preview">
+          <div id="muton-project-cover" role="img" aria-label="案例封面素材占位">
+            <span id="muton-cover-category"></span>
+            <span id="muton-cover-number"></span>
+            <span class="muton-cover-placeholder">案例封面素材占位</span>
+            <span id="muton-cover-name"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="muton-live-page" aria-label="直播视觉二级页" hidden>
+      <div class="muton-project-nav">
+        <svg id="muton-live-nav-art" viewBox="0 0 1920 60" role="img" aria-label="MUTON.木木其，聊聊合作，项目，直播，菜单"></svg>
+      </div>
+      <div id="muton-live-scroll">
+        <header class="ml-hero">
+          <div class="ml-eyebrow"><span data-live-type="MULTI-CATEGORY LIVE VISUALS"></span><span data-live-type="LIVE VISUAL DESIGN"></span></div>
+          <h1><span class="ml-entry"><span style="--enter-delay:80ms">从一个产品</span></span><span class="ml-entry"><span style="--enter-delay:220ms">到一套直播视觉系统。</span></span></h1>
+          <div class="ml-hero-bottom"><p><span class="ml-entry"><span style="--enter-delay:480ms">让品牌、产品与权益，在同一画面里清晰发生。</span></span><span class="ml-entry"><span style="--enter-delay:620ms">从日常直播到大促专场，兼顾创意与持续更新。</span></span></p></div><div class="ml-archive-entry"><button type="button" class="ml-link cursor-interaction" data-live-gallery>浏览直播案例 ↘</button></div>
+          <div class="ml-categories" aria-label="服务过的直播品类"><button type="button" class="ml-category cursor-interaction" aria-pressed="false"><span>01 / FOOD</span><strong>食品饮品</strong><small>多燕瘦 / 盱眙龙虾</small></button><button type="button" class="ml-category cursor-interaction" aria-pressed="false"><span>02 / APPLIANCES</span><strong>家电厨电</strong><small>老板 / 美的 / 华帝</small></button><button type="button" class="ml-category cursor-interaction" aria-pressed="false"><span>03 / TECHNOLOGY</span><strong>科技出行</strong><small>小米 / 九号电动车</small></button><button type="button" class="ml-category cursor-interaction" aria-pressed="false"><span>04 / TOYS</span><strong>玩具 IP</strong><small>变形金刚</small></button><button type="button" class="ml-category cursor-interaction" aria-pressed="false"><span>05 / FURNITURE</span><strong>家居生活</strong><small>纳图兹 / 中源家居</small></button><button type="button" class="ml-category cursor-interaction" aria-pressed="false"><span>06 / TEXTILES</span><strong>家纺织物</strong><small>家纺直播视觉</small></button><button type="button" class="ml-category cursor-interaction" aria-pressed="false"><span>07 / WINE</span><strong>酒类饮品</strong><small>新真如酒类专营</small></button><button type="button" class="ml-category cursor-interaction" aria-pressed="false"><span>08 / JEWELRY</span><strong>珠宝饰品</strong><small>周大生</small></button></div>
+          <div class="ml-hero-word" aria-hidden="true">LIVE.</div>
+        </header>
+        <section class="ml-section" aria-labelledby="ml-service-title">
+          <div class="ml-section-label" data-live-type="FULL-SCENE VISUAL SYSTEM" data-live-scroll-type></div>
+          <h2 id="ml-service-title" data-live-reveal>覆盖每个触点<br>构建完整直播视觉。</h2>
+          <div class="ml-services">
+            <article data-live-service><span>01</span><h3>预热引流</h3><p>让观众在开播之前识别品牌、主题与活动信息。</p><small>直播封面 / 预热海报 / 倒计时 / 资源位</small></article>
+            <article data-live-service><span>02</span><h3>场景与背景</h3><p>协调品牌氛围、主播留白与产品展示，让画面适合真实直播。</p><small>主题 KV / 绿幕全景 / 直播背景 / 现场物料</small></article>
+            <article data-live-service><span>03</span><h3>产品与权益</h3><p>明确产品卖点、价格、赠品与福利，建立信息的阅读顺序。</p><small>产品展示 / 卖点标签 / 价格福利 / 权益说明</small></article>
+            <article data-live-service><span>04</span><h3>贴片与持续更新</h3><p>用同一视觉语言承接活动变化，适配多平台、多账号。</p><small>上下侧贴片 / 动态贴片 / 节点更新 / 尺寸延展</small></article>
+          </div>
+        </section>
+        <section class="ml-section ml-system" aria-labelledby="ml-system-title">
+          <div class="ml-section-label" data-live-type="MODULAR DESIGN" data-live-scroll-type></div>
+          <div class="ml-system-layout">
+            <div><h2 id="ml-system-title" data-live-reveal>主题可以变化<br>系统持续复用。</h2><p class="ml-body">将直播背景、产品区、价格福利与贴片拆成相对独立的组件。保留品牌与活动识别，让单品、权益和账号变化更容易衔接。</p><ol class="ml-module-list"><li>背景与主题<span>建立活动氛围</span></li><li>主播与产品<span>保留展示空间</span></li><li>价格与福利<span>突出关键决策信息</span></li><li>贴片与延展<span>快速替换、适配更新</span></li></ol><p class="ml-source-note">方法案例：多燕瘦「夏日冲刺大促」<br>同一活动主题，适配血橙饮、七日膳食套装等单品账号。</p></div>
+            <div class="ml-assembly" data-live-assembly role="img" aria-label="立体手机直播模型：从右侧渐显入场，到位后轻微漂浮，跟随鼠标偏转">
+              <div class="ml-assembly-entry"><div class="ml-assembly-phone"><div class="ml-device-back" aria-hidden="true"></div><i class="ml-device-key" aria-hidden="true"></i><i class="ml-device-key key-lower" aria-hidden="true"></i><i class="ml-device-key key-right" aria-hidden="true"></i><span class="ml-speaker" aria-hidden="true"></span><div class="ml-device-screen"><div class="ml-assembly-title">LIVE<span>品牌直播间</span></div><div class="ml-assembly-host"><span>主播区域</span></div><div class="ml-piece ml-piece-product">产品展示区</div><div class="ml-piece ml-piece-top">品牌识别 · 活动主题</div><div class="ml-piece ml-piece-benefit"><span>产品权益</span><strong>价格 / 福利</strong></div><div class="ml-piece ml-piece-bottom">直播贴片 · 行动引导</div></div></div></div>
+              <small data-live-type="背景 / 产品 / 权益 / 贴片" data-live-scroll-type data-live-assembly-caption></small>
+            </div>
+          </div>
+        </section>
+        <section class="ml-section ml-process" aria-labelledby="ml-process-title">
+          <div class="ml-process-pin">
+            <svg id="ml-process-tiles" aria-hidden="true" preserveAspectRatio="none"></svg>
+            <div class="ml-process-words">
+              <div class="ml-section-label">WORKFLOW + AIGC</div>
+              <h2 id="ml-process-title"><span class="ml-read-line"><span>洞察品类与业务需求</span><span class="ml-read-white" aria-hidden="true">洞察品类与业务需求</span></span><span class="ml-read-line"><span>构建统一的视觉语言</span><span class="ml-read-white" aria-hidden="true">构建统一的视觉语言</span></span><span class="ml-read-line"><span>以模块化体系支撑持续交付</span><span class="ml-read-white" aria-hidden="true">以模块化体系支撑持续交付</span></span></h2>
+              <p class="ml-process-note" data-live-type="AIGC 辅助探索｜人工合成与校准" data-live-scroll-type></p>
+            </div>
+          </div>
+        </section>
+        <section class="ml-section ml-gallery" id="muton-live-gallery" aria-labelledby="ml-gallery-title">
+          <div class="ml-gallery-heading"><h2 id="ml-gallery-title" data-live-type="{ 直播的不同现场 }" data-live-gallery-title></h2></div>
+          <div id="muton-live-grid" aria-label="错落分布的直播案例展场"></div>
+          <div id="muton-live-focus-status" class="sr-only" aria-live="polite"></div>
+        </section>
+        <footer class="ml-footer"><div class="ml-footer-body"><button type="button" class="cursor-interaction" id="muton-live-contact"><span>下一个直播项目</span><span>一起 <em>开始 ↘</em></span></button><div class="ml-footer-word" aria-hidden="true">LET’S TALK</div></div></footer>
+      </div>
+    </section>
+    <section id="muton-detail-page" aria-label="案例详情" hidden>
+      <div class="md-nav"><svg id="muton-detail-nav-art" viewBox="0 0 1920 60" aria-hidden="true"></svg></div>
+      <div id="muton-detail-scroll">
+        <header class="md-hero">
+          <figure class="md-cover"><canvas id="md-cover-canvas" role="img" aria-label="项目封面素材占位，轻微波浪摇摆"></canvas><div class="md-cover-reveal" aria-hidden="true"></div></figure>
+          <div class="md-hero-copy"><h1 id="md-title"></h1><div class="md-hero-meta"><span id="md-category"></span><span>项目简介与年份待补充</span></div></div>
+        </header>
+        <div class="md-content"><section class="md-intro" aria-label="项目概况">
+          <div class="md-topline"><button type="button" data-detail-back class="cursor-interaction">← 返回项目</button><span>项目概况</span></div>
+          <div class="md-summary"><dl><div><dt>服务内容</dt><dd>设计内容待补充</dd></div><div><dt>担任角色</dt><dd>本人职责待补充</dd></div><div><dt>项目年份</dt><dd>年份待补充</dd></div></dl><p>这里用一段简短说明介绍项目背景、设计目标与我的工作<br>具体内容随案例素材补充</p></div>
+        </section>
+        <section class="md-explanation" aria-label="设计说明"><h2>设计说明</h2><p>用简短文字说明这组作品的设计方向与关键处理<br>让项目背景与下方的视觉成果形成对应</p></section>
+        <div class="md-media-grid" id="md-media-grid"></div>
+        <figure class="md-wide md-placeholder"><span class="md-image-label">应用展示</span><div class="md-placeholder-word" aria-hidden="true">IN USE</div><figcaption>实际应用 / 场景展示素材待替换</figcaption></figure>
+        <div class="md-endnote"><span>项目内容与图片待素材包替换</span><button type="button" data-detail-top class="cursor-interaction">回到顶部 ↑</button></div>
+        <footer class="md-next"><div class="md-next-label">NEXT PROJECT</div><button type="button" id="md-next-project" class="cursor-interaction"><span id="md-next-title"></span><span aria-hidden="true">↗</span></button><button type="button" data-detail-back class="md-back-bottom cursor-interaction">← 返回项目</button></footer></div>
+      </div>
+    </section>
+    <div id="muton-project-curtain" aria-hidden="true" hidden>
+      <svg class="muton-route-animation" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg>
+    </div>
+  </div>
+  <div class="viz-controls" style="margin-top:12px">
+    <button type="button" class="btn" id="muton-play">播放分镜</button>
+    <label class="form-label" style="flex:1;min-width:160px">动效进度 <span id="muton-progress" class="tabular-nums">65%</span><input class="form-range" id="muton-range" type="range" min="0" max="100" value="65" aria-label="拖动查看动效分镜"></label>
+  </div>
+  <div id="muton-state" class="text-small" aria-live="polite"></div>
+  <table class="table table-sm" style="margin-top:12px"><thead><tr><th scope="col">文字 / 元素</th><th scope="col">桌面尺寸与排版</th></tr></thead><tbody id="muton-specs"></tbody></table>
+  <details><summary class="cursor-interaction">本章完整文字</summary><div id="muton-copy" style="white-space:pre-line;margin-top:10px"></div></details>
+  <div class="text-small" style="margin-top:12px">第二阶段内容审阅副本：保持 2026-10-04 已确认布局与动效。真实素材已接入，部分项目年份、职责及设计说明尚待核实；当前仍为交互分镜，未上线。</div>
+</div>
+<style>
+#muton-storyboard .muton-product{position:relative;background:#000;color:#f0f0f0;overflow:hidden;width:100%;aspect-ratio:16/9;font-family:'Helvetica Neue',Arial,'PingFang SC','Microsoft YaHei',sans-serif}
+#muton-storyboard #muton-hero-motion{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+#muton-storyboard #muton-stage{display:block;width:100%;height:100%;position:relative;background:transparent}
+#muton-storyboard #muton-stage text,#muton-storyboard #muton-project-nav-art text,#muton-storyboard #muton-menu-nav-art text{font-family:'Helvetica Neue',Arial,'PingFang SC','Microsoft YaHei',sans-serif}
+#muton-storyboard #muton-stage text:not([font-weight]),#muton-storyboard #muton-project-nav-art text:not([font-weight]),#muton-storyboard #muton-menu-nav-art text:not([font-weight]){font-weight:400}
+#muton-storyboard .muton-caret{animation:muton-caret-blink 1s steps(1,end) infinite}
+@keyframes muton-caret-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+#muton-storyboard .muton-product{container-type:inline-size}
+#muton-storyboard #muton-live-layer{position:absolute;inset:0;pointer-events:none}
+#muton-storyboard .muton-phone{position:absolute;padding:0;border:2px solid #555560;border-radius:3cqw;background:#16161d;color:#f0f0f0;overflow:hidden;pointer-events:auto;transform:translate(-50%,-50%);font-family:inherit;box-shadow:0 1cqw 3cqw #0009}
+#muton-storyboard .muton-phone-screen{position:absolute;inset:2%;border-radius:2.6cqw;background:linear-gradient(160deg,#20203c,#080810);overflow:hidden}
+#muton-storyboard .muton-phone-island{position:absolute;top:2%;left:35%;width:30%;height:3%;border-radius:20px;background:#000}
+#muton-storyboard .muton-phone-live{position:absolute;top:10%;left:10%;font-size:.8cqw;letter-spacing:.1em;color:#adadbc}
+#muton-storyboard .muton-phone-number{position:absolute;top:27%;left:0;width:100%;font-size:5cqw;font-weight:500;color:#6666a0}
+#muton-storyboard .muton-phone-placeholder{position:absolute;top:50%;left:0;width:100%;font-size:1.1cqw;color:#a2a2b3}
+#muton-storyboard .muton-phone-block{position:absolute;left:15%;top:61%;width:70%;height:17%;background:#272744;border-radius:.5cqw}
+#muton-storyboard .muton-phone-caption{position:absolute;left:12%;bottom:9%;width:76%;font-size:.85cqw;color:#b3b3c1}
+#muton-storyboard .muton-phone-info{position:absolute;inset:auto 0 0;height:54%;box-sizing:border-box;padding:18% 9% 9%;display:flex;flex-direction:column;justify-content:flex-end;text-align:left;background:linear-gradient(to top,#000075fa 0%,#000029f0 57%,#00001000 100%);opacity:0;transform:translateY(100%);transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .4s ease;pointer-events:none}
+#muton-storyboard .muton-phone-info-title{display:block;font-size:1.5cqw;font-weight:500;line-height:1.35;color:#f0f0f0}
+#muton-storyboard .muton-phone-info-copy{display:block;margin-top:.75cqw;font-size:1.14cqw;line-height:1.6;color:#c9cae1}
+#muton-storyboard .muton-phone-info-title,#muton-storyboard .muton-phone-info-copy{opacity:0;transform:translateY(.8cqw);transition:transform .4s ease,opacity .4s ease}
+#muton-storyboard .muton-phone.is-revealed .muton-phone-info{opacity:1;transform:translateY(0)}
+#muton-storyboard .muton-phone.is-revealed .muton-phone-info-title,#muton-storyboard .muton-phone.is-revealed .muton-phone-info-copy{opacity:1;transform:translateY(0);transition-delay:.12s}
+#muton-storyboard .muton-phone.is-revealed .muton-phone-info-copy{transition-delay:.20s}
+@media(prefers-reduced-motion:reduce){#muton-storyboard .muton-phone-info,#muton-storyboard .muton-phone-info-title,#muton-storyboard .muton-phone-info-copy{transition:none}}
+#muton-storyboard td{overflow-wrap:anywhere}
+#muton-storyboard summary{margin-top:10px}
+#muton-storyboard [hidden]{display:none!important}
+#muton-storyboard .muton-route-hit{position:absolute;z-index:45;background:transparent;border:0;padding:0}
+#muton-storyboard #muton-home-entry{left:1.98%;top:.3cqw;width:10.5%;height:2.5cqw}
+#muton-storyboard #muton-home-entry:hover{background:#ffffff0c}
+#muton-storyboard #muton-home-entry:active{background:#ffffff20}
+#muton-storyboard #muton-contact-entry{left:14.0625%;top:.6771cqw;width:7.5%;height:1.8229cqw}
+#muton-storyboard #muton-live-entry{left:87.8125%;top:.6771cqw;width:4.8958%;height:1.8229cqw}
+#muton-storyboard #muton-menu-entry{left:93.3333%;top:.6771cqw;width:4.8958%;height:1.8229cqw}
+#muton-storyboard #muton-menu{position:absolute;inset:0;z-index:35;background:#0000f0;color:#f0f0f0;display:flex;flex-direction:column;animation:muton-menu-enter .38s cubic-bezier(.22,1,.36,1)}
+#muton-storyboard #muton-menu-nav-art{display:block;width:100%;height:3.125cqw;flex:none}
+#muton-storyboard .muton-menu-body{display:grid;grid-template-columns:1.4fr 1fr;gap:8cqw;flex:1;padding:5cqw 7cqw 2cqw}
+#muton-storyboard .muton-menu-primary{display:flex;flex-direction:column;justify-content:center}
+#muton-storyboard .muton-menu-primary button{display:flex;align-items:center;gap:2cqw;background:none;border:0;padding:.2cqw 0;color:inherit;font:300 5cqw/1.45 'Helvetica Neue',Arial,'PingFang SC',sans-serif;text-align:left}
+#muton-storyboard .muton-menu-primary button>span{font:400 .85cqw/1 monospace}
+#muton-storyboard .muton-menu-primary i{font-style:normal;font-size:3.8cqw;color:#60f030;opacity:0;transform:translateX(-1cqw);transition:opacity .2s,transform .2s}
+#muton-storyboard .muton-menu-primary button:hover,#muton-storyboard .muton-menu-primary button:focus-visible{color:#60f030}
+#muton-storyboard .muton-menu-primary button:hover i,#muton-storyboard .muton-menu-primary button:focus-visible i{opacity:1;transform:translateX(0)}
+#muton-storyboard .muton-menu-aside{display:flex;flex-direction:column;justify-content:space-between;padding:1.8cqw 0;font-size:1.45cqw;line-height:1.8}
+#muton-storyboard .muton-menu-aside p{margin:0}
+#muton-storyboard .muton-menu-aside p>span{font-size:1.15cqw}
+#muton-storyboard .muton-menu-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:.9cqw 1.5cqw}
+#muton-storyboard .muton-menu-shortcuts button,#muton-storyboard .muton-menu-email,#muton-storyboard #muton-menu-close{background:none;border:0;color:inherit;padding:0;text-align:left;font:inherit}
+#muton-storyboard .muton-menu-shortcuts button{font-size:1.2cqw}
+#muton-storyboard .muton-menu-shortcuts button:hover,#muton-storyboard .muton-menu-email:hover,#muton-storyboard #muton-menu-close:hover{color:#60f030}
+#muton-storyboard .muton-menu-email{font-size:1.2cqw;overflow-wrap:anywhere}
+#muton-storyboard .muton-menu-bottom{display:flex;justify-content:space-between;margin:0 7cqw;padding:1.8cqw 0;border-top:1px solid #ffffff66;font-size:1.15cqw}
+@keyframes muton-menu-enter{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){#muton-storyboard #muton-menu{animation:none}}
+#muton-storyboard #muton-project-entry{left:82.2917%;top:.6771cqw;width:4.8958%;height:1.8229cqw}
+#muton-storyboard #muton-all-projects{left:43.75%;top:50.8333cqw;width:12.5%;height:2.2917cqw}
+#muton-storyboard #muton-project-page{position:absolute;inset:0;background:#000;color:#eee;z-index:20;display:flex;flex-direction:column;font-family:'Helvetica Neue',Arial,'PingFang SC',sans-serif}
+#muton-storyboard .muton-project-nav{height:3.125cqw;flex:none;position:relative;background:#000}
+#muton-storyboard #muton-project-nav-art{display:block;width:100%;height:100%}
+#muton-storyboard .muton-project-intro{position:relative;height:12.9cqw;flex:none;padding:3.65cqw 1.35cqw 0;box-sizing:border-box;border-bottom:1px solid #242424}
+#muton-storyboard .muton-project-intro h2{display:flex;align-items:center;gap:1.05cqw;margin:0;color:#eee;font-size:4.375cqw;font-weight:300;line-height:1.05;letter-spacing:-.08cqw}
+#muton-storyboard .muton-project-intro h2>span{width:.9cqw;height:.9cqw;background:#60f030;flex:none}
+#muton-storyboard #muton-project-categories{display:flex;align-items:center;gap:.64cqw;margin:1.7cqw 0 0 2.1cqw;max-width:73cqw;flex-wrap:wrap}
+#muton-storyboard #muton-project-categories button{background:none;border:0;padding:0;color:#454545;font:400 1.04cqw/1.3 inherit;white-space:nowrap;font-family:inherit;font-size:1.04cqw;line-height:1.3;transition:color .18s}
+#muton-storyboard #muton-project-categories button[aria-pressed="true"],#muton-storyboard #muton-project-categories button:hover{color:#eee}
+#muton-storyboard #muton-project-categories sup{font-size:.65em;margin-left:.2em}
+#muton-storyboard #muton-project-search{position:absolute;right:1.35cqw;bottom:1.8cqw;width:17.8cqw;min-width:0;box-sizing:border-box;background:none;border:0;border-bottom:1px solid #888;border-radius:0;padding:0 0 .35cqw;color:#eee;font:300 1.6cqw/1.2 'Helvetica Neue',Arial,sans-serif}
+#muton-storyboard #muton-project-search::placeholder{color:#383838}
+#muton-storyboard .muton-project-body{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0}
+#muton-storyboard #muton-project-list{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#333 #000;border-right:1px solid #242424}
+#muton-storyboard .muton-project-row{position:relative;display:flex;align-items:center;gap:.65cqw;width:100%;min-height:8.2cqw;box-sizing:border-box;padding:1.4cqw 3.5cqw 1.4cqw 1.35cqw;border:0;border-bottom:1px solid #292929;background:#000;color:#303030;text-align:left;font-family:inherit;transition:background .18s,color .18s}
+#muton-storyboard .muton-project-row[aria-pressed="true"]{background:#1000f0;color:#efefef}
+#muton-storyboard .muton-project-index{align-self:flex-start;padding-top:.48cqw;font:400 .68cqw/1.2 monospace;min-width:1.5cqw}
+#muton-storyboard .muton-project-title{font-size:2.7cqw;font-weight:300;line-height:1.1;letter-spacing:-.035cqw}
+#muton-storyboard .muton-project-arrow{position:absolute;right:1.35cqw;bottom:.7cqw;color:#60f030;font-size:2.1cqw;opacity:0}
+#muton-storyboard .muton-project-row[aria-pressed="true"] .muton-project-arrow{opacity:1}
+#muton-storyboard .muton-project-preview{padding:1.04cqw;min-width:0}
+#muton-storyboard #muton-project-cover{position:relative;aspect-ratio:4/3;width:100%;overflow:hidden;background:linear-gradient(130deg,#303036,#111115);color:#a7a7ad}
+#muton-storyboard #muton-cover-category{position:absolute;left:5%;top:6%;font-size:1.3cqw;font-weight:300}
+#muton-storyboard #muton-cover-number{position:absolute;left:5%;top:25%;font-size:12cqw;line-height:1;font-weight:300;letter-spacing:-.7cqw;color:#505059}
+#muton-storyboard .muton-cover-placeholder{position:absolute;left:6%;bottom:18%;font-size:1.4cqw;letter-spacing:.1em}
+#muton-storyboard #muton-cover-name{position:absolute;left:6%;bottom:7%;font-size:.9cqw}
+#muton-storyboard .muton-project-empty{padding:2cqw;color:#8c8c95;font-size:1.3cqw}
+#muton-storyboard #muton-project-curtain{position:absolute;inset:0;z-index:50;overflow:hidden;pointer-events:auto}
+#muton-storyboard .muton-route-animation{display:block;width:100%;height:100%}
+@media(max-width:600px){
+ #muton-storyboard .muton-product.menu-mode{aspect-ratio:auto!important;height:860px}
+ #muton-storyboard .muton-menu-body{display:flex;flex-direction:column;gap:24px;padding:32px 24px 18px}
+ #muton-storyboard .muton-menu-primary button{font-size:38px;line-height:1.6;gap:20px}
+ #muton-storyboard .muton-menu-primary button>span{font-size:11px}
+ #muton-storyboard .muton-menu-primary i{font-size:30px;opacity:1}
+ #muton-storyboard .muton-menu-aside{font-size:14px;gap:20px;padding:0}
+ #muton-storyboard .muton-menu-aside p>span,#muton-storyboard .muton-menu-shortcuts button,#muton-storyboard .muton-menu-email{font-size:13px}
+ #muton-storyboard .muton-menu-shortcuts{gap:12px}
+ #muton-storyboard .muton-menu-bottom{margin:0 24px;padding:18px 0;font-size:12px}
+ #muton-storyboard .muton-product.project-mode{aspect-ratio:auto!important;height:780px}
+ #muton-storyboard .muton-project-intro{height:205px;padding:24px 12px 0}
+ #muton-storyboard .muton-project-intro h2{font-size:36px;gap:12px}
+ #muton-storyboard .muton-project-intro h2>span{width:8px;height:8px}
+ #muton-storyboard #muton-project-categories{margin:18px 0 0;gap:10px 12px;max-width:none}
+ #muton-storyboard #muton-project-categories button{font-size:12px;line-height:1.5}
+ #muton-storyboard #muton-project-search{left:12px;right:12px;bottom:12px;width:calc(100% - 24px);font-size:17px;padding-bottom:4px}
+ #muton-storyboard .muton-project-body{display:flex;flex-direction:column}
+ #muton-storyboard .muton-project-preview{order:-1;padding:12px;flex:none}
+ #muton-storyboard #muton-project-cover{aspect-ratio:1.9}
+ #muton-storyboard #muton-cover-category{font-size:13px}
+ #muton-storyboard #muton-cover-number{font-size:70px;top:22%}
+ #muton-storyboard .muton-cover-placeholder{font-size:12px;left:40%;bottom:30%}
+ #muton-storyboard #muton-cover-name{font-size:10px;left:40%;bottom:15%}
+ #muton-storyboard #muton-project-list{flex:1;border-top:1px solid #292929}
+ #muton-storyboard .muton-project-row{min-height:80px;padding:15px 32px 15px 12px;gap:10px}
+ #muton-storyboard .muton-project-title{font-size:23px}
+ #muton-storyboard .muton-project-index{font-size:10px;padding-top:4px}
+ #muton-storyboard .muton-project-arrow{font-size:22px;right:12px;bottom:10px}
+ #muton-storyboard .muton-project-empty{font-size:14px;padding:20px}
+}
+#muton-storyboard #muton-all-live{left:42.7083%;top:51.4583cqw;width:14.5833%;height:2.2917cqw}
+#muton-storyboard #muton-live-page{position:absolute;inset:0;z-index:20;background:#000;color:#eee;display:flex;flex-direction:column;font-family:'Helvetica Neue',Arial,'PingFang SC',sans-serif}
+#muton-storyboard #muton-live-nav-art{display:block;width:100%;height:100%}
+#muton-storyboard #muton-live-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#303030 #000}
+#muton-storyboard .ml-hero{position:relative;overflow:hidden;padding:4.2cqw 5cqw 0;min-height:49cqw;box-sizing:border-box}
+#muton-storyboard .ml-eyebrow{display:flex;justify-content:space-between;font-size:clamp(11px,1cqw,16px);color:#929299;position:relative;z-index:1}
+#muton-storyboard .ml-hero h1{position:relative;z-index:1;font-size:5.3cqw;font-weight:300;line-height:1.2;letter-spacing:-.25cqw;margin:4cqw 0 2cqw;color:#eee}
+#muton-storyboard .ml-hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:3cqw;position:relative;z-index:1}
+#muton-storyboard .ml-hero-bottom p{font-size:clamp(12px,1.28cqw,22px);line-height:1.8;margin:0;color:#bbb}
+#muton-storyboard .ml-link{background:none;border:0;color:#60f030;font:400 clamp(12px,1.2cqw,20px)/1.8 inherit;font-family:inherit;padding:0 0 .4cqw;font-size:clamp(12px,1.2cqw,20px);white-space:nowrap}
+#muton-storyboard .ml-hero-word{position:absolute;right:-2cqw;top:8cqw;font-size:31cqw;line-height:1;font-weight:500;color:#070752;letter-spacing:-2cqw;pointer-events:none}
+#muton-storyboard .ml-section{padding:6cqw 5cqw 7cqw;border-top:1px solid #202025}
+#muton-storyboard .ml-section-label{font:400 clamp(11px,.95cqw,16px)/1.4 monospace;color:#888891;letter-spacing:.04em;margin-bottom:3cqw}
+#muton-storyboard .ml-section h2{font-size:4.4cqw;font-weight:300;line-height:1.25;letter-spacing:-.12cqw;margin:0 0 4cqw;color:#eee}
+#muton-storyboard .ml-services{display:block;width:66.6667%;margin-left:auto}
+#muton-storyboard .ml-services article{position:relative;border-top:1px solid #34343a;padding:2cqw 0 3cqw 3.8cqw;min-width:0}
+#muton-storyboard .ml-services article>span{position:absolute;left:0;top:2.3cqw;color:#60f030;font:400 1cqw/1.2 monospace}
+#muton-storyboard .ml-section h3{font-size:clamp(17px,2cqw,34px);font-weight:400;line-height:1.5;margin:0 0 1cqw;color:#eee}
+#muton-storyboard .ml-services p,#muton-storyboard .ml-body{font-size:clamp(12px,1.25cqw,22px);line-height:1.9;color:#a5a5ae;margin:0 0 1.4cqw}
+#muton-storyboard .ml-services small,#muton-storyboard .ml-source-note{font-size:clamp(11px,1cqw,17px);line-height:1.8;color:#777782}
+#muton-storyboard .ml-system{background:#000;border-bottom:0}
+#muton-storyboard .ml-system-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:8cqw}
+#muton-storyboard .ml-system h2{margin-bottom:2cqw}
+#muton-storyboard .ml-module-list{list-style:none;margin:3cqw 0 2cqw;padding:0}
+#muton-storyboard .ml-module-list li{display:flex;justify-content:space-between;gap:1cqw;border-top:1px solid #32323a;padding:1.2cqw 0;font-size:clamp(12px,1.3cqw,22px)}
+#muton-storyboard .ml-module-list li span{color:#8c8c9a;font-size:clamp(11px,1.1cqw,18px)}
+#muton-storyboard .ml-assembly{display:flex;align-items:center;justify-content:center;flex-direction:column;perspective:800px;min-height:45cqw}
+#muton-storyboard .ml-assembly-phone{position:relative;width:23cqw;aspect-ratio:9/18.8;border:2px solid #626273;border-radius:3cqw;background:linear-gradient(160deg,#080888,#030320 75%);box-shadow:0 0 6cqw #08087a55}
+#muton-storyboard .ml-speaker{position:absolute;top:.7cqw;left:38%;width:24%;height:.6cqw;border-radius:20px;background:#000}
+#muton-storyboard .ml-assembly-title{position:absolute;top:13%;left:8%;font-size:5cqw;line-height:.95;font-weight:500;letter-spacing:-.25cqw;color:#2727dc}
+#muton-storyboard .ml-assembly-host{position:absolute;top:38%;left:31%;height:24%;width:36%;border-radius:45% 45% 0 0;background:linear-gradient(#ffffff12,#ffffff02);color:#7575ad;display:grid;place-items:center;font-size:1cqw}
+#muton-storyboard .ml-piece{position:absolute;display:grid;place-items:center;border:1px solid #6464a3;font-size:1.15cqw;transition:transform 1.1s cubic-bezier(.22,1,.36,1);background:#14143f}
+#muton-storyboard .ml-piece-top{top:5%;left:6%;width:88%;height:9%;transform:translate(-5cqw,-3cqw);transition-delay:0s;background:#1414c3}
+#muton-storyboard .ml-piece-product{top:60%;left:7%;width:40%;height:17%;transform:translate(-5cqw,2cqw);transition-delay:.1s}
+#muton-storyboard .ml-piece-benefit{top:60%;right:7%;width:40%;height:17%;transform:translate(5cqw,3cqw);transition-delay:.2s}
+#muton-storyboard .ml-piece-bottom{bottom:6%;left:6%;width:88%;height:12%;transform:translate(3cqw,5cqw);transition-delay:.3s;background:#0909c0}
+#muton-storyboard .ml-assembly.is-visible .ml-piece{transform:none}
+#muton-storyboard .ml-assembly>small{font-size:clamp(11px,1cqw,16px);color:#78788b;margin-top:2cqw}
+#muton-storyboard .ml-gallery{padding-left:3cqw;padding-right:3cqw}
+#muton-storyboard .ml-gallery-heading{display:block;text-align:center}
+#muton-storyboard .ml-gallery-heading p{margin:0;font-size:clamp(11px,1.1cqw,18px);line-height:1.8;color:#aaa}
+#muton-storyboard .ml-gallery-heading p span{color:#777}
+
+#muton-storyboard [data-live-reveal]{opacity:.1;transform:translateY(3cqw);transition:opacity .75s ease,transform 1s cubic-bezier(.22,1,.36,1);transition-delay:var(--live-delay,0ms)}
+#muton-storyboard [data-live-reveal].is-visible{opacity:1;transform:none}
+
+
+
+
+
+@media(max-width:600px){
+ #muton-storyboard .muton-product.live-page-mode{aspect-ratio:auto!important;height:780px}
+ #muton-storyboard .ml-hero{padding:28px 20px 0;min-height:440px}
+ #muton-storyboard .ml-eyebrow{flex-wrap:wrap;gap:8px}
+ #muton-storyboard .ml-hero h1{font-size:clamp(22px,6.1cqw,34px);letter-spacing:-1px;margin:40px 0 24px}
+ #muton-storyboard .ml-hero-bottom{display:block}
+ #muton-storyboard .ml-link{margin-top:0;font-size:13px}
+ #muton-storyboard .ml-hero-word{top:105px;font-size:130px}
+ #muton-storyboard .ml-section{padding:40px 20px}
+ #muton-storyboard .ml-section-label{margin-bottom:25px}
+ #muton-storyboard .ml-section h2{font-size:28px;margin-bottom:25px;letter-spacing:-1px}
+ #muton-storyboard .ml-services,#muton-storyboard .ml-system-layout{grid-template-columns:1fr;gap:20px}
+ #muton-storyboard .ml-services article{padding:18px 0 5px 26px}
+ #muton-storyboard .ml-services article>span{top:23px;font-size:11px}
+ #muton-storyboard .ml-services article{padding-top:18px;padding-bottom:26px}
+ #muton-storyboard .ml-module-list{margin:26px 0}
+ #muton-storyboard .ml-module-list li{padding:14px 0;gap:12px}
+ #muton-storyboard .ml-assembly{min-height:510px}
+ #muton-storyboard .ml-assembly-phone{width:220px;border-radius:28px}
+ #muton-storyboard .ml-speaker{top:9px;height:7px}
+ #muton-storyboard .ml-assembly-title{font-size:45px}
+ #muton-storyboard .ml-piece,#muton-storyboard .ml-assembly-host{font-size:12px}
+ #muton-storyboard .ml-gallery-heading{display:block}
+
+
+
+}
+
+#muton-storyboard .ml-hero{padding-top:4.6cqw;padding-bottom:4.6cqw;min-height:52cqw}
+#muton-storyboard .ml-hero h1{margin-top:4.5cqw;margin-bottom:2.6cqw}
+#muton-storyboard .ml-eyebrow [data-live-type]{white-space:pre}
+#muton-storyboard .ml-type-char{visibility:hidden}
+#muton-storyboard .is-typing .ml-type-char{animation:ml-type-on .01s both;animation-delay:calc(var(--char)*65ms)}
+#muton-storyboard .ml-type-cursor{display:inline-block;width:.48em;height:.68em;background:#9999a5;margin-left:.4em;vertical-align:baseline;opacity:0}
+#muton-storyboard .is-typing .ml-type-cursor{animation:ml-cursor .9s step-end infinite;animation-delay:var(--type-end)}
+@keyframes ml-type-on{to{visibility:visible}}
+@keyframes ml-cursor{0%,48%{opacity:1}49%,100%{opacity:0}}
+#muton-storyboard .ml-categories{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:1fr;gap:2.4cqw 2.6cqw;margin-top:0}
+#muton-storyboard .ml-categories>button{box-sizing:border-box;min-width:0;border:1px solid #36366a;border-radius:1.35cqw;padding:1cqw 1.5cqw;background:#080815;color:#ddd;text-align:left;font-family:inherit;transition:background .3s,border-color .3s,transform .45s cubic-bezier(.22,1,.36,1)}
+#muton-storyboard .ml-categories span{display:block;color:#77778d;font-size:clamp(9px,.66cqw,13px);letter-spacing:.09em}
+#muton-storyboard .ml-categories strong{display:block;margin:.45cqw 0 .25cqw;color:#ddd;font-size:1.75cqw;font-weight:400}
+#muton-storyboard .ml-categories small{color:#93939f;font-size:clamp(11px,.95cqw,17px);line-height:1.5}
+#muton-storyboard .ml-section{padding-top:9cqw;padding-bottom:10cqw}
+#muton-storyboard .ml-services{margin-top:5cqw}
+#muton-storyboard .ml-services article{padding-top:2.2cqw;padding-bottom:2.8cqw}
+#muton-storyboard .ml-system-layout{align-items:center}
+#muton-storyboard .ml-process{padding-top:11cqw;padding-bottom:12cqw;text-align:center;border-top:0;background:#0000f0}
+#muton-storyboard .ml-process .ml-section-label{margin-bottom:4.5cqw;color:#b5b5ff}
+#muton-storyboard #ml-process-title{font-size:4cqw;line-height:1.65;margin:0;color:#f0f0f0;letter-spacing:-.07cqw}
+#muton-storyboard #ml-process-title>span{display:block}
+#muton-storyboard .ml-process-note{font-size:clamp(12px,1.4583cqw,28px);font-weight:400;letter-spacing:0;line-height:1.8;margin:3.5cqw 0 0;color:#b5b5ff;min-height:1.8em}
+#muton-storyboard .ml-gallery{padding:6cqw 0 4cqw;border-top:0;overflow:hidden}
+#muton-storyboard .ml-gallery>.ml-section-label,#muton-storyboard .ml-gallery-heading{margin-left:5cqw;margin-right:5cqw}
+#muton-storyboard .ml-gallery-heading{margin-bottom:4cqw}
+#muton-storyboard #muton-live-grid{position:relative;width:100%;margin:0;height:104cqw;isolation:isolate;overflow:hidden;touch-action:pan-y}
+#muton-storyboard .ml-case{position:absolute;display:block;box-sizing:border-box;width:13%;aspect-ratio:9/19;padding:0;border:0;background:none;text-align:left;color:#eee;opacity:var(--card-opacity,.9);transform-origin:center;transition:transform .85s cubic-bezier(.22,1,.36,1),opacity .5s;will-change:transform}
+#muton-storyboard .ml-case-face{container-type:inline-size;position:absolute;inset:0;display:block;border-radius:1.1cqw;overflow:hidden;background:linear-gradient(145deg,#222237,#070718 80%);box-shadow:inset 0 0 0 1px #77779933,0 .8cqw 2cqw #0008;will-change:transform}
+
+#muton-storyboard .ml-case:nth-child(4n+2) .ml-case-face{background:linear-gradient(155deg,#13136d,#070711 75%)}
+#muton-storyboard .ml-case:nth-child(4n+3) .ml-case-face{background:linear-gradient(155deg,#33333b,#10101c 80%)}
+#muton-storyboard .ml-case:nth-child(4n) .ml-case-face{background:linear-gradient(155deg,#232354,#030326 80%)}
+
+#muton-storyboard .ml-case-kind{position:absolute;left:10%;right:8%;top:7%;font-size:8cqw;letter-spacing:.06em;color:#9393ab;line-height:1.5}
+#muton-storyboard .ml-case-number{position:absolute;left:8%;top:25%;font-size:52cqw;font-weight:300;letter-spacing:-3cqw;color:#565678;line-height:1}
+#muton-storyboard .ml-case-art{position:absolute;left:12%;right:12%;bottom:24%;height:19%;border:1px solid #6c6c8733;color:#8989a5;display:grid;place-items:center;font-size:7cqw;font-style:normal}
+#muton-storyboard .ml-case-bottom{position:absolute;left:10%;right:10%;bottom:6%;height:11%;background:linear-gradient(115deg,#1818a5,#26264e);display:grid;place-items:center;font-size:7cqw;color:#9191b7}
+#muton-storyboard .ml-case-info{position:absolute;inset:auto 0 0;height:48%;box-sizing:border-box;padding:17% 9% 9%;background:linear-gradient(0deg,#070737 35%,#070728ed 70%,#07072800);display:flex;flex-direction:column;justify-content:flex-end;opacity:0;transform:translateY(70%);transition:opacity .38s,transform .5s cubic-bezier(.22,1,.36,1);pointer-events:none}
+#muton-storyboard .ml-case-info strong{font-size:8.8cqw;line-height:1.45;font-weight:400;color:#f0f0f6}
+#muton-storyboard .ml-case-info>span{font-size:6.5cqw;line-height:1.7;color:#aaaabc;margin-top:5cqw}
+#muton-storyboard .ml-case.is-focused{opacity:1}
+#muton-storyboard .ml-case.is-focused .ml-case-face{box-shadow:inset 0 0 0 1px #8888be99,0 1.5cqw 8cqw #000c}
+#muton-storyboard .ml-case.is-settled .ml-case-info{opacity:1;transform:none}
+#muton-storyboard #muton-live-grid.has-focus .ml-case:not(.is-focused){opacity:.46}
+#muton-storyboard .ml-case:focus-visible{outline:2px solid #60f030;outline-offset:5px}
+@media(max-width:600px){
+ #muton-storyboard .ml-hero{padding:32px 20px 42px;min-height:0}
+ #muton-storyboard .ml-hero h1{margin:42px 0 28px}
+ #muton-storyboard .ml-eyebrow{gap:15px;font-size:10px}
+ #muton-storyboard .ml-categories{grid-template-columns:1fr 1fr;gap:22px 20px;margin-top:0}
+ #muton-storyboard .ml-categories>button{padding:10px 12px}
+ #muton-storyboard .ml-categories strong{font-size:18px;margin:5px 0 3px}
+ #muton-storyboard .ml-section{padding-top:65px;padding-bottom:70px}
+ #muton-storyboard .ml-services{width:100%;margin-top:35px}
+ #muton-storyboard .ml-process{padding:80px 15px 90px}
+ #muton-storyboard .ml-process .ml-section-label{margin-bottom:30px}
+ #muton-storyboard #ml-process-title{font-size:clamp(20px,5.5cqw,30px);line-height:1.85;letter-spacing:-.5px}
+ #muton-storyboard .ml-process-note{margin-top:28px}
+ #muton-storyboard .ml-gallery{padding:40px 0}
+ #muton-storyboard .ml-gallery-heading{margin-bottom:25px}
+ #muton-storyboard .ml-case-face{border-radius:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ #muton-storyboard [data-live-reveal]{opacity:1;transform:none;transition:none}
+ #muton-storyboard .ml-piece{transition:none;transform:none}
+ #muton-storyboard .ml-case,#muton-storyboard .ml-case-info{transition:none}
+ #muton-storyboard .ml-case-face,#muton-storyboard .ml-type-cursor{animation:none!important}
+ #muton-storyboard .ml-type-char{visibility:visible}
+}
+#muton-storyboard .ml-entry{display:block;overflow:hidden}
+#muton-storyboard .ml-entry>span{display:block;transform:translateY(110%);opacity:0;transition:transform .9s cubic-bezier(.22,1,.36,1),opacity .6s;transition-delay:var(--enter-delay,0ms)}
+#muton-storyboard .ml-hero.is-typing .ml-entry>span{transform:translateY(0);opacity:1}
+#muton-storyboard .ml-categories>button:hover,#muton-storyboard .ml-categories>button:focus-visible{background:#080815;border-color:#60f030;transform:none}
+
+
+#muton-storyboard .ml-gallery-heading #ml-gallery-title{font-size:clamp(12px,1.4583cqw,28px);font-weight:400;line-height:1.8;letter-spacing:0;color:#7e7e99;margin:0 auto 1.5cqw;min-height:1.8em}
+
+@media(max-width:600px){#muton-storyboard .ml-categories{gap:20px 18px}#muton-storyboard .ml-categories>button{border-radius:16px}#muton-storyboard .ml-gallery-heading #ml-gallery-title{font-size:14px;margin-bottom:16px}}
+@media(prefers-reduced-motion:reduce){#muton-storyboard .ml-entry>span{transform:none;opacity:1;transition:none}#muton-storyboard .ml-categories>button{transition:none}}
+#muton-storyboard .ml-process{position:relative;z-index:2;height:calc(var(--ml-view-height,53.125cqw)*2.4);padding:0;background:transparent}
+#muton-storyboard .ml-process-pin{position:sticky;top:0;height:var(--ml-view-height,53.125cqw);display:flex;align-items:center;justify-content:center;overflow:hidden;pointer-events:none;will-change:transform}
+#muton-storyboard #ml-process-tiles{position:absolute;inset:0;width:100%;height:100%;display:block}
+#muton-storyboard .ml-process-words{position:relative;z-index:1;width:100%;padding:0 4cqw;box-sizing:border-box}
+#muton-storyboard #ml-process-title{color:#000}
+#muton-storyboard .ml-read-line{position:relative;width:max-content;max-width:100%;margin:auto}
+#muton-storyboard .ml-read-white{position:absolute;inset:0;color:#f0f0f0;clip-path:inset(0 100% 0 0)}
+#muton-storyboard .ml-gallery{position:relative;z-index:1;margin-top:calc(var(--ml-view-height,53.125cqw)*-1);margin-bottom:calc(var(--ml-view-height,53.125cqw)*.9);transform:translateY(var(--process-lift,0px))}
+@media(prefers-reduced-motion:reduce){
+ #muton-storyboard .ml-process{height:var(--ml-view-height,53.125cqw)}
+ #muton-storyboard .ml-process-pin{position:relative;transform:none!important}
+ #muton-storyboard .ml-read-white{clip-path:none!important}
+ #muton-storyboard .ml-gallery{margin-top:0;margin-bottom:0;transform:none!important}
+}
+
+#muton-storyboard :is(#muton-project-entry,#muton-live-entry,#muton-menu-entry){border-radius:.2083cqw;color:#000;font:400 .8854cqw/1 'Helvetica Neue',Arial,'PingFang SC',sans-serif;transition:background .2s}
+#muton-storyboard :is(#muton-project-entry,#muton-live-entry,#muton-menu-entry)>span{opacity:0;transition:opacity .2s}
+#muton-storyboard :is(#muton-project-entry,#muton-live-entry,#muton-menu-entry):is(:hover,:focus-visible){background:#60f030}
+#muton-storyboard :is(#muton-project-entry,#muton-live-entry,#muton-menu-entry):is(:hover,:focus-visible)>span{opacity:1}
+#muton-storyboard [data-live-service]{opacity:0;will-change:transform,opacity}
+#muton-storyboard .ml-categories strong{transition:color .3s}
+#muton-storyboard #ml-process-tiles{color:#000}
+@media(prefers-reduced-motion:reduce){#muton-storyboard [data-live-service]{opacity:1;transform:none!important}#muton-storyboard .ml-case-face{transform:none!important}}
+
+#muton-storyboard .ml-categories small{transition:color .35s}
+
+#muton-storyboard .ml-assembly-phone{width:22cqw;aspect-ratio:9/19;border:1px solid #4c4c58;border-radius:2.5cqw;background:linear-gradient(165deg,#101026,#03030b 65%);box-shadow:inset 0 0 0 .4cqw #08080e,1cqw 1.5cqw 3cqw #000;opacity:0;transform:translateX(12cqw);transition:transform 1.5s cubic-bezier(.25,.65,.25,1),opacity 1.2s ease}
+#muton-storyboard .ml-assembly.is-visible .ml-assembly-phone{transform:none;opacity:1}
+#muton-storyboard .ml-speaker{top:.65cqw;left:40%;width:20%;height:.35cqw;background:#262631}
+#muton-storyboard .ml-assembly-title{top:19%;left:9%;font-size:4.6cqw;font-weight:400;letter-spacing:-.2cqw;color:#3333ba}
+#muton-storyboard .ml-assembly-title>span{display:block;font-size:1cqw;letter-spacing:.12em;color:#9999b0;margin-top:1cqw}
+#muton-storyboard .ml-assembly-host{top:35%;left:43%;width:45%;height:35%;background:none;border-radius:0;color:#777787;font-size:.95cqw}
+#muton-storyboard .ml-assembly-host::before{content:'';position:absolute;top:0;left:32%;width:36%;aspect-ratio:1;border-radius:50%;background:linear-gradient(130deg,#4a4a63,#242436)}
+#muton-storyboard .ml-assembly-host::after{content:'';position:absolute;left:3%;right:3%;top:27%;bottom:0;border-radius:50% 50% 8% 8%;background:linear-gradient(120deg,#343449,#151522)}
+#muton-storyboard .ml-assembly-host>span{position:relative;z-index:1;margin-top:15%}
+#muton-storyboard .ml-piece{box-sizing:border-box;border-radius:.5cqw;border:1px solid #454567;background:#17172d;color:#d7d7e4;font-size:1cqw;opacity:.2;transition:transform 1.1s cubic-bezier(.22,1,.36,1),opacity .7s}
+#muton-storyboard .ml-piece-top{top:6%;left:7%;width:86%;height:8%;background:#14146e;transform:translate(-2cqw,-2cqw);transition-delay:0s}
+#muton-storyboard .ml-piece-product{top:auto;bottom:23%;left:8%;width:37%;height:24%;transform:translate(-3cqw,1cqw);transition-delay:.12s}
+#muton-storyboard .ml-piece-benefit{top:auto;bottom:23%;right:8%;width:42%;height:13%;display:flex;flex-direction:column;gap:.5cqw;background:#20204a;transform:translate(3cqw,2cqw);transition-delay:.24s}
+#muton-storyboard .ml-piece-benefit>span{font-size:.8cqw;color:#a0a0bd}
+#muton-storyboard .ml-piece-benefit>strong{font-size:1.05cqw;font-weight:400}
+#muton-storyboard .ml-piece-bottom{bottom:8%;left:7%;width:86%;height:9%;background:#151581;transform:translateY(3cqw);transition-delay:.36s}
+#muton-storyboard .ml-assembly.is-visible .ml-piece{opacity:1}
+#muton-storyboard .ml-footer{position:relative;height:36cqw;overflow:hidden;background:#0000f0;color:#f0f0f0}
+#muton-storyboard .ml-footer-body{position:relative;box-sizing:border-box;height:100%;padding:3.6cqw 5cqw 0;will-change:transform}
+
+#muton-storyboard .ml-footer button{display:block;text-align:left;background:none;border:0;padding:0;margin:0;color:#f0f0f0;font:400 3.7cqw/1.4 'Helvetica Neue',Arial,'PingFang SC',sans-serif}
+#muton-storyboard .ml-footer button>span{display:block}
+#muton-storyboard .ml-footer button>span+span{font-size:2.8cqw;margin-top:1cqw}
+#muton-storyboard .ml-footer em{font-style:normal;color:#60f030}
+#muton-storyboard .ml-footer button:hover em{color:#b1efa0}
+
+#muton-storyboard .ml-footer-word{position:absolute;left:3cqw;bottom:-1cqw;white-space:nowrap;font:900 17.7cqw/.95 Arial,sans-serif;letter-spacing:-.8cqw;color:#000}
+@media(max-width:600px){
+ #muton-storyboard .ml-assembly-phone{width:220px;border-radius:25px}
+ #muton-storyboard .ml-speaker{top:7px;height:4px}
+ #muton-storyboard .ml-assembly-title{font-size:46px}
+ #muton-storyboard .ml-assembly-title>span{font-size:11px;margin-top:10px}
+ #muton-storyboard .ml-piece,#muton-storyboard .ml-assembly-host{font-size:11px}
+ #muton-storyboard .ml-piece{border-radius:5px}
+ #muton-storyboard .ml-piece-benefit>span{font-size:10px}
+ #muton-storyboard .ml-piece-benefit>strong{font-size:12px}
+ #muton-storyboard .ml-footer{height:300px}#muton-storyboard .ml-footer-body{padding:32px 20px 0}
+ #muton-storyboard .ml-footer button{font-size:28px;margin-top:0}
+ #muton-storyboard .ml-footer button>span+span{font-size:25px;margin-top:15px}
+
+}
+@media(prefers-reduced-motion:reduce){#muton-storyboard .ml-assembly-phone{transform:none;opacity:1;transition:none}#muton-storyboard .ml-piece{opacity:1;transition:none}#muton-storyboard .ml-footer-body{transform:none!important}}
+#muton-storyboard .ml-archive-entry{position:relative;z-index:1;display:flex;justify-content:flex-end;margin:1.3cqw 0 1.4cqw}
+@media(max-width:600px){#muton-storyboard .ml-archive-entry{margin:20px 0 14px}}
+#muton-storyboard #muton-detail-page{position:absolute;inset:0;z-index:30;background:#000;color:#eee;display:flex;flex-direction:column}
+#muton-storyboard .md-nav{height:3.125cqw;flex:none;background:#000;position:relative;z-index:2}
+#muton-storyboard #muton-detail-nav-art{width:100%;height:100%;display:block}
+#muton-storyboard #muton-detail-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#333 #000}
+#muton-storyboard .md-intro{padding:4cqw 5cqw 4.4cqw}
+#muton-storyboard .md-topline{display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:clamp(11px,1.05cqw,18px);color:#92929d}
+#muton-storyboard #muton-detail-page button{font-family:inherit;cursor:inherit}
+#muton-storyboard .md-topline button,#muton-storyboard .md-endnote button,#muton-storyboard .md-back-bottom{padding:8px 0;border:0;background:none;color:#60f030;font-size:inherit}
+#muton-storyboard #md-title{font-size:5.8cqw;font-weight:300;line-height:1.2;letter-spacing:-.22cqw;max-width:88%;margin:4.5cqw 0 4cqw;text-wrap:balance}
+#muton-storyboard .md-summary{display:grid;grid-template-columns:1fr 1fr;gap:6cqw}
+#muton-storyboard .md-summary dl{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4cqw;margin:0}
+#muton-storyboard .md-summary dt{font-size:clamp(11px,.95cqw,17px);color:#777783;margin-bottom:.8cqw}
+#muton-storyboard .md-summary dd{font-size:clamp(12px,1.15cqw,20px);line-height:1.7;margin:0;color:#ccc}
+#muton-storyboard .md-summary p,#muton-storyboard .md-explanation p{font-size:clamp(12px,1.3cqw,22px);line-height:1.9;color:#a8a8b2;margin:0}
+#muton-storyboard .md-placeholder{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0;background:#14141c}
+#muton-storyboard .md-cover{margin:0 3cqw;aspect-ratio:16/9;background:linear-gradient(130deg,#0b0b4b,#15151f 70%)}
+#muton-storyboard .md-image-label{position:absolute;left:2.2cqw;top:2.2cqw;color:#9292a5;font-size:clamp(12px,1.1cqw,18px)}
+#muton-storyboard .md-placeholder-word{font-size:11cqw;font-weight:300;letter-spacing:-.6cqw;color:#424255}
+#muton-storyboard .md-placeholder figcaption{position:absolute;bottom:2.2cqw;left:2.2cqw;right:2.2cqw;color:#808092;font-size:clamp(11px,.95cqw,17px);line-height:1.6}
+#muton-storyboard .md-explanation{padding:6cqw 5cqw;display:grid;grid-template-columns:1fr 1fr;gap:6cqw}
+#muton-storyboard .md-explanation h2{margin:0;font-size:clamp(18px,2.3cqw,40px);font-weight:400;letter-spacing:-.04em}
+#muton-storyboard .md-media-grid{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;margin:0 3cqw 2cqw}
+#muton-storyboard .md-media-grid .md-placeholder{aspect-ratio:4/5}
+#muton-storyboard .md-media-grid .md-placeholder:nth-child(2){background:#1b1b25}
+#muton-storyboard .md-media-grid .md-placeholder-word{font-size:7cqw;color:#393946}
+#muton-storyboard .md-media-grid.is-portrait{grid-template-columns:repeat(3,1fr);gap:3cqw;padding:2cqw 5cqw 4cqw}
+#muton-storyboard .md-media-grid.is-portrait .md-placeholder{aspect-ratio:9/19;border-radius:1cqw}
+#muton-storyboard .md-media-grid.is-portrait .md-placeholder-word{font-size:5cqw}
+#muton-storyboard .md-wide{aspect-ratio:16/10;margin:0 3cqw;background:#10101a}
+#muton-storyboard .md-endnote{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:2.4cqw 5cqw 6cqw;color:#777783;font-size:clamp(11px,1cqw,17px)}
+#muton-storyboard .md-next{border-top:1px solid #292934;padding:4cqw 5cqw 5cqw}
+#muton-storyboard .md-next-label{font-size:clamp(11px,.9cqw,17px);letter-spacing:.05em;color:#878795;margin-bottom:2cqw}
+#muton-storyboard #md-next-project{display:flex;width:100%;align-items:center;justify-content:space-between;gap:3cqw;text-align:left;background:none;border:0;padding:0;color:#eee;font-size:4.5cqw;font-weight:300;line-height:1.3}
+#muton-storyboard #md-next-project>span:last-child{color:#60f030;font-size:6cqw;transition:transform .3s}
+#muton-storyboard #md-next-project:hover>span:last-child{transform:translate(4px,-4px)}
+#muton-storyboard .md-back-bottom{display:block;margin-top:4cqw;font-size:clamp(12px,1.1cqw,18px)}
+#muton-storyboard #muton-project-cover{cursor:inherit}
+@media(max-width:600px){
+ #muton-storyboard .muton-product.detail-mode{aspect-ratio:auto!important;height:780px}
+ #muton-storyboard .md-intro{padding:28px 20px 30px}
+ #muton-storyboard #md-title{font-size:34px;letter-spacing:-1px;max-width:100%;margin:32px 0}
+ #muton-storyboard .md-summary{grid-template-columns:1fr;gap:25px}
+ #muton-storyboard .md-summary dl{gap:12px}
+ #muton-storyboard .md-summary dt{margin-bottom:6px}
+ #muton-storyboard .md-summary p br,#muton-storyboard .md-explanation p br{display:none}
+ #muton-storyboard .md-explanation{padding:35px 20px;grid-template-columns:1fr;gap:18px}
+ #muton-storyboard .md-cover{aspect-ratio:4/3}
+ #muton-storyboard .md-media-grid{grid-template-columns:1fr;gap:12px;margin-bottom:12px}
+ #muton-storyboard .md-media-grid .md-placeholder{aspect-ratio:4/3}
+ #muton-storyboard .md-media-grid.is-portrait{grid-template-columns:1fr 1fr;padding:0;gap:12px}
+ #muton-storyboard .md-media-grid.is-portrait .md-placeholder:last-child{grid-column:1/-1;width:60%;justify-self:center}
+ #muton-storyboard .md-placeholder-word{font-size:16cqw}
+ #muton-storyboard .md-media-grid .md-placeholder-word{font-size:14cqw}
+ #muton-storyboard .md-media-grid.is-portrait .md-placeholder-word{font-size:8cqw}
+ #muton-storyboard .md-image-label{top:12px;left:12px}
+ #muton-storyboard .md-placeholder figcaption{left:12px;right:12px;bottom:12px}
+ #muton-storyboard .md-endnote{margin:20px;align-items:flex-start;font-size:11px}
+ #muton-storyboard .md-next{padding:30px 20px 35px}
+ #muton-storyboard #md-next-project{font-size:26px;gap:20px}
+ #muton-storyboard #md-next-project>span:last-child{font-size:35px}
+ #muton-storyboard .md-back-bottom{margin-top:30px}
+}
+@media(prefers-reduced-motion:reduce){#muton-storyboard #md-next-project>span:last-child{transition:none}}
+#muton-storyboard .md-hero{height:53.125cqw;position:relative;isolation:isolate;background:#000;overflow:hidden}
+#muton-storyboard .md-cover{position:absolute;top:.7cqw;left:31%;right:1%;height:85%;margin:0;background:transparent;aspect-ratio:auto}
+#muton-storyboard #md-cover-canvas{display:block;width:100%;height:100%}
+#muton-storyboard .md-cover-reveal{position:absolute;inset:0;display:grid;grid-template-columns:repeat(9,1fr);grid-template-rows:repeat(6,1fr);pointer-events:none}
+#muton-storyboard .md-cover-reveal i{background:#000;margin:-1px}
+#muton-storyboard .md-hero-copy{position:absolute;left:2.2cqw;right:3cqw;bottom:2.4cqw;z-index:1;pointer-events:none}
+#muton-storyboard #md-title{font-size:4.8cqw;font-weight:300;line-height:1.08;letter-spacing:-.19cqw;max-width:67%;margin:0 0 1.7cqw;text-wrap:balance}
+#muton-storyboard #md-title span{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+#muton-storyboard #md-title b{display:block;font-weight:inherit}
+#muton-storyboard .md-hero-meta{display:flex;flex-direction:column;gap:.3cqw;font-size:clamp(11px,1.08cqw,19px);line-height:1.35;color:#a6a6ad}
+#muton-storyboard .md-intro{padding:4cqw 5cqw 2cqw}
+#muton-storyboard .md-topline{margin-bottom:3cqw}
+#muton-storyboard .md-summary{padding-top:2cqw}
+@media(max-width:600px){
+ #muton-storyboard .md-hero{height:630px;max-height:100%;min-height:580px}
+ #muton-storyboard .md-cover{left:8%;right:2%;top:50px;height:auto;aspect-ratio:4/3}
+ #muton-storyboard .md-hero-copy{left:20px;right:20px;bottom:45px}
+ #muton-storyboard #md-title{font-size:34px;letter-spacing:-1.1px;max-width:100%;margin:0 0 24px;line-height:1.15}
+ #muton-storyboard .md-hero-meta{font-size:12px;gap:5px}
+ #muton-storyboard .md-intro{padding:28px 20px 18px}
+ #muton-storyboard .md-topline{margin-bottom:24px}
+}
+
+#muton-storyboard .ml-assembly{perspective:1100px}
+#muton-storyboard .ml-assembly-entry{width:22cqw;aspect-ratio:9/19;opacity:0;transform:translateX(12cqw);transition:transform 1.5s cubic-bezier(.25,.65,.25,1),opacity 1.2s ease;transform-style:preserve-3d}
+#muton-storyboard .ml-assembly.is-visible .ml-assembly-entry{opacity:1;transform:translateX(0)}
+#muton-storyboard .ml-assembly-phone,#muton-storyboard .ml-assembly.is-visible .ml-assembly-phone{width:100%;height:100%;opacity:1;border:0;border-radius:3cqw;transform:rotateY(-5deg);transform-style:preserve-3d;transition:none;background:linear-gradient(115deg,#67676a 0%,#212124 13%,#080809 42%,#333335 72%,#6d6d70 92%,#1a1a1c);box-shadow:inset 0 0 0 1px #68686b,inset 0 0 0 3px #111113,1px 2px 0 #343438,3px 4px 0 #161619,5px 6px 0 #09090a,1cqw 1.6cqw 3cqw #000;will-change:transform}
+#muton-storyboard .ml-device-back{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,#4d4d50,#09090b 24%,#1f1f22 86%,#727277);transform:translateZ(-7px);box-shadow:inset 0 0 0 1px #414145}
+#muton-storyboard .ml-device-screen{position:absolute;inset:1.4% 2.2%;border-radius:2.65cqw;overflow:hidden;background:radial-gradient(ellipse at 18% 10%,#222242,transparent 65%),linear-gradient(150deg,#101021,#07070d 75%);transform:translateZ(.5px);box-shadow:0 0 0 1px #030305}
+#muton-storyboard .ml-device-screen::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,#ffffff09,transparent 38%,transparent 72%,#ffffff04);box-shadow:inset 0 0 0 1px #ffffff0c}
+#muton-storyboard .ml-device-key{position:absolute;left:-1.1%;width:1.3%;height:8%;top:20%;border-radius:2px;background:linear-gradient(90deg,#111,#727275,#202023);transform:translateZ(-3px)}
+#muton-storyboard .ml-device-key.key-lower{top:30%;height:9%}
+#muton-storyboard .ml-device-key.key-right{left:auto;right:-1.1%;top:25%;height:13%}
+#muton-storyboard .ml-assembly-phone>.ml-speaker{top:.5%;left:42%;width:16%;height:.3%;background:#080809;z-index:2}
+#muton-storyboard .ml-device-screen .ml-piece{border-color:#62628255;background:#24243e88;border-radius:.75cqw;color:#d2d2df}
+#muton-storyboard .ml-device-screen .ml-piece-top{background:#23236d88}
+#muton-storyboard .ml-device-screen .ml-piece-bottom{background:#25257388}
+#muton-storyboard .ml-device-screen .ml-assembly-title{color:#5e5ead}
+#muton-storyboard .ml-assembly>small{margin-top:3cqw}
+@media(max-width:600px){#muton-storyboard .ml-assembly-entry{width:220px}#muton-storyboard .ml-assembly-phone,#muton-storyboard .ml-assembly.is-visible .ml-assembly-phone{border-radius:30px}#muton-storyboard .ml-device-screen{border-radius:26px}#muton-storyboard .ml-device-screen .ml-piece{border-radius:7px}#muton-storyboard .ml-assembly>small{margin-top:25px}}
+@media(prefers-reduced-motion:reduce){#muton-storyboard .ml-assembly-entry{opacity:1;transform:none;transition:none}#muton-storyboard .ml-assembly-phone,#muton-storyboard .ml-assembly.is-visible .ml-assembly-phone{transform:none!important;will-change:auto}}
+
+#muton-storyboard .muton-phone{border:0;border-radius:calc(2.35cqw * var(--phone-scale,1));overflow:visible;transform-style:preserve-3d;background:linear-gradient(115deg,#67676a 0%,#212124 13%,#080809 42%,#333335 72%,#6d6d70 92%,#1a1a1c);box-shadow:inset 0 0 0 1px #68686b,inset 0 0 0 3px #111113,1px 2px 0 #343438,3px 4px 0 #161619,5px 6px 0 #09090a,1cqw 1.6cqw 3cqw #000}
+#muton-storyboard .muton-phone .muton-phone-screen{inset:1.4% 2.2%;border-radius:calc(2.08cqw * var(--phone-scale,1))}
+#muton-storyboard .muton-phone>.ml-speaker{top:.5%;left:42%;width:16%;height:.3%;background:#080809;z-index:2}
+
+
+/* Real content: preserve the approved containers, allow artwork's native proportions. */
+#muton-storyboard [hidden]{display:none!important}
+#muton-storyboard [data-logo]{opacity:.4;transition:opacity .25s}
+#muton-storyboard [data-logo]:hover,#muton-storyboard [data-logo]:focus-visible{opacity:1;outline:none}
+#muton-storyboard .stage-screen-media{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+#muton-storyboard .muton-phone-info,#muton-storyboard .ml-case-info{z-index:2}
+#muton-storyboard .project-real-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#muton-storyboard #muton-project-cover>span{display:none}
+#muton-storyboard .md-cover.is-live{left:auto;right:12%;width:auto;aspect-ratio:9/19;height:85%}
+#muton-storyboard .md-media-grid,#muton-storyboard .md-media-grid.is-portrait{display:block;margin:0;padding:0}
+#muton-storyboard .md-design-section{margin:0 5cqw 7cqw}
+#muton-storyboard .md-design-section h2{font-size:clamp(18px,2.1cqw,34px);font-weight:400;line-height:1.5;margin:0 0 2cqw;color:#ddd}
+#muton-storyboard .md-section-media{display:grid;grid-template-columns:repeat(var(--section-columns),minmax(0,1fr));align-items:start;gap:2cqw}
+#muton-storyboard .md-real-media{margin:0;min-width:0;align-self:start}
+#muton-storyboard .md-real-media img,#muton-storyboard .md-real-media video{display:block;width:100%;max-width:var(--source-width);height:auto;object-fit:contain;margin:auto}
+#muton-storyboard [data-layout="hero"] .md-section-media{grid-template-columns:1fr;gap:3cqw}
+#muton-storyboard [data-layout="sequence"] .md-section-media{display:block;max-width:var(--section-width);margin:auto}
+#muton-storyboard [data-layout="sequence"] .md-real-media+.md-real-media{margin-top:2cqw}
+#muton-storyboard [data-layout="portrait"] .md-section-media{max-width:var(--section-width);margin:auto}
+#muton-storyboard [data-layout="portrait"] .md-real-media:only-child{grid-column:1/-1;max-width:440px;margin:auto}
+#muton-storyboard [data-layout="components"] .md-section-media{grid-template-columns:repeat(var(--component-columns),minmax(0,1fr));gap:2.5cqw;padding:3cqw;background:var(--component-background);align-items:center}
+#muton-storyboard [data-layout="components"] .md-real-media{display:flex;align-items:center;justify-content:center;min-height:150px;align-self:center}
+#muton-storyboard [data-layout="components"] .md-real-media img,#muton-storyboard [data-layout="components"] .md-real-media video{width:auto;max-width:min(100%,var(--source-width));max-height:240px}
+#muton-storyboard .md-summary dl{grid-template-columns:repeat(auto-fit,minmax(100px,1fr))}
+#muton-storyboard .assembly-slide{opacity:0;transition:opacity .7s}
+#muton-storyboard .assembly-slide.is-current{opacity:1}
+@media(prefers-reduced-motion:reduce){#muton-storyboard .assembly-slide{transition:none}}
+@media(max-width:600px){#muton-storyboard .md-cover.is-live{width:48%;height:auto;right:5%}#muton-storyboard .md-design-section{margin:0 20px 42px}#muton-storyboard .md-design-section h2{margin-bottom:16px}#muton-storyboard .md-section-media{gap:12px}#muton-storyboard [data-layout="components"] .md-section-media{grid-template-columns:repeat(2,minmax(0,1fr));padding:16px;gap:18px}#muton-storyboard [data-layout="components"] .md-real-media{min-height:90px}#muton-storyboard [data-layout="components"] .md-real-media img{max-height:150px}}
+
+/* Detail reading rhythm, shared across case studies. */
+#muton-storyboard{line-break:strict;word-break:normal;overflow-wrap:normal}
+#muton-storyboard .md-hero{position:sticky;top:0;z-index:0}
+#muton-storyboard .md-hero-copy{transform:translateY(calc(var(--cover-scroll,0px) * -1));will-change:transform}
+#muton-storyboard .md-content{position:relative;z-index:1;background:#000;min-height:100%}
+#muton-storyboard .md-intro{background:#26272a;padding:1.6cqw 3cqw 2cqw;margin-bottom:7cqw}
+#muton-storyboard .md-topline{margin-bottom:1.2cqw;font-size:clamp(11px,.85cqw,14px)}
+#muton-storyboard .md-summary{display:block;padding-top:0}
+#muton-storyboard .md-summary dl{grid-template-columns:repeat(3,minmax(0,1fr));gap:4cqw}
+#muton-storyboard .md-summary p{max-width:600px;margin:2cqw 0 0 auto}
+#muton-storyboard .md-summary dt{font-size:clamp(10px,.75cqw,13px)}
+#muton-storyboard .md-summary dd{font-size:clamp(12px,1.02cqw,17px);line-height:1.6}
+#muton-storyboard .md-design-section{margin:0 3cqw 8cqw}
+#muton-storyboard .md-editorial-copy{display:grid;grid-template-columns:1fr 1fr;gap:7cqw;margin-bottom:3cqw;align-items:start}
+#muton-storyboard .md-editorial-copy h2{font-size:clamp(17px,1.5cqw,25px);line-height:1.6;letter-spacing:-.025em;font-weight:400;max-width:24em;margin:0}
+#muton-storyboard .md-editorial-copy p{font-size:clamp(14px,1.15cqw,19px);line-height:1.85;color:#a7a7af;margin:0 0 1em;max-width:36em;text-wrap:pretty}
+#muton-storyboard .md-editorial-copy p:last-child{margin-bottom:0}
+#muton-storyboard .md-editorial-intro{margin-top:1cqw;margin-bottom:7cqw}
+#muton-storyboard .md-editorial-intro h2{font-size:clamp(22px,2.1cqw,34px);max-width:18em}
+#muton-storyboard .md-section-media{gap:1.2cqw;max-width:var(--section-width);margin-inline:auto}
+#muton-storyboard [data-layout="hero"] .md-section-media{max-width:var(--section-width);margin:auto}
+#muton-storyboard [data-layout="video"] .md-section-media{display:block;width:70%;max-width:var(--section-width);margin:0 auto}
+#muton-storyboard [data-layout="video"] video{max-height:75cqh;width:auto;max-width:100%;background:#080808}
+#muton-storyboard [data-layout="portrait"] .md-section-media{max-width:var(--section-width)}
+#muton-storyboard [data-layout="components"] .md-section-media{padding:3cqw;gap:2cqw}
+#muton-storyboard [data-layout="components"] .md-real-media{min-height:100px}
+#muton-storyboard [data-layout="components"] .md-real-media img{max-height:200px}
+#muton-storyboard [data-layout="text"]{margin-bottom:6cqw}
+#muton-storyboard .md-endnote{margin-top:0;padding-top:2cqw;border-top:1px solid #222}
+#muton-storyboard #muton-fluid-grid{position:absolute;inset:0;width:100%;height:100%;z-index:44;pointer-events:none;mix-blend-mode:screen}
+@media(max-width:600px){
+ #muton-storyboard .md-intro{padding:20px;margin-bottom:48px}
+ #muton-storyboard .md-summary dl{gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+ #muton-storyboard .md-summary p{margin-top:24px}
+ #muton-storyboard .md-design-section{margin:0 20px 48px}
+ #muton-storyboard .md-editorial-copy{grid-template-columns:1fr;gap:14px;margin-bottom:24px}
+ #muton-storyboard .md-editorial-copy h2{font-size:18px}
+ #muton-storyboard .md-editorial-intro h2{font-size:23px}
+ #muton-storyboard .md-editorial-copy p{font-size:14px;line-height:1.8}
+ #muton-storyboard .md-section-media{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ #muton-storyboard [data-layout="video"] .md-section-media{width:100%}
+ #muton-storyboard [data-layout="components"] .md-real-media img{max-height:145px}
+}
+@media(prefers-reduced-motion:reduce){#muton-storyboard #muton-fluid-grid{display:none}#muton-storyboard .md-hero-copy{will-change:auto}}
+/* Fourth review: clearer reading scale and semantic title lines. */
+#muton-storyboard [data-layout="portrait"] .md-real-media:only-child{max-width:var(--section-width);width:100%}
+#muton-storyboard #md-title b{overflow-wrap:normal;word-break:normal;line-break:strict;text-wrap:balance}
+#muton-storyboard .muton-menu-aside{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr auto auto;gap:1.6cqw 2cqw;align-items:start}
+#muton-storyboard .menu-identity{grid-column:1/-1}
+#muton-storyboard .menu-portrait{grid-column:2;grid-row:2;width:100%;height:22cqw;object-fit:cover;object-position:50% 38%;align-self:center}
+#muton-storyboard .muton-menu-aside>p:not(.menu-identity){grid-column:1;grid-row:2;align-self:center;font-size:1.22cqw}
+#muton-storyboard .muton-menu-shortcuts,#muton-storyboard .muton-menu-email{grid-column:1/-1}
+#muton-storyboard .md-screen-analysis{position:relative;max-width:500px;margin:0 auto}
+#muton-storyboard .md-screen-map{position:relative}
+#muton-storyboard .md-screen-analysis img{display:block;width:100%;height:auto}
+#muton-storyboard .md-zone{position:absolute;left:0;right:0;border:1px solid #b4c3cb99;pointer-events:none}
+#muton-storyboard .md-zone span{position:absolute;top:4px;left:5px;background:#111d;color:#eee;font-size:12px;padding:5px 8px;line-height:1.4}
+#muton-storyboard .md-figure-note{font-size:12px;color:#85858c;line-height:1.6;margin:14px 0 0}
+@media(max-width:600px){
+ #muton-storyboard .muton-menu-aside{display:grid;grid-template-columns:1fr 120px;gap:18px}
+ #muton-storyboard .menu-portrait{height:160px}
+ #muton-storyboard .muton-menu-aside>p:not(.menu-identity){font-size:13px}
+ #muton-storyboard .md-zone span{font-size:10px;padding:3px 5px}
+}
+#muton-storyboard [data-layout="logo"] .md-section-media{display:flex;align-items:center;justify-content:center;background:#fff;min-height:clamp(240px,30cqw,480px);padding:6cqw}
+#muton-storyboard [data-layout="logo"] .md-real-media{width:min(100%,560px)}
+#muton-storyboard [data-layout="logo"] img{width:100%;height:auto}
+@media(min-width:601px){#muton-storyboard .muton-menu-body{padding-top:3cqw;padding-bottom:1cqw}}
+/* The portrait is drawn as a softly waving mesh; the SVG image remains the fallback. */
+#muton-storyboard #muton-live-grid{overflow:visible}
+#muton-storyboard.portrait-wave-ready [data-about-portrait]{opacity:0}
+#muton-storyboard #muton-portrait-wave{position:absolute;z-index:3;pointer-events:none}
+
+/* Seventh review: the complete work entry activates both levels of copy. */
+#muton-storyboard [data-detail-work]{pointer-events:bounding-box}
+#muton-storyboard [data-work-title],#muton-storyboard [data-work-copy]{fill:#93939c;transition:fill .16s ease-out}
+#muton-storyboard [data-detail-work]:hover [data-work-title],#muton-storyboard [data-detail-work]:hover [data-work-copy],#muton-storyboard [data-detail-work]:focus-visible [data-work-title],#muton-storyboard [data-detail-work]:focus-visible [data-work-copy]{fill:#fff}
+
+#muton-storyboard .muton-line-arrow{display:inline-block;width:1em;height:1em;vertical-align:-.12em;overflow:visible;flex:none;color:inherit}
+
+</style>
+<link rel="stylesheet" href="site.css?v=round2"><script src="app.js?v=round2"></script></body></html>
