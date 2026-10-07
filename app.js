@@ -1206,6 +1206,9 @@ function navigate(path){
  history.pushState({route:path,source,home:homePosition,caseDepth},'','#'+path);
  applyRoute(path,false);
 }
+function notifyAnalytics(){
+ try{const parts=currentRoute.split('/');const key=parts[1]==='case'?(parts[2]==='live'?'live:':'project:')+detailInfo(parts[2],Number(parts[3])).uid:currentRoute.startsWith('/home/')?'/home':currentRoute;window.MutonAnalytics?.page(key);}catch{}
+}
 function applyRoute(path,restorePosition=false){
  clearTimeout(routeSaveTimer);
  routeApplying=true;cancelAnimationFrame(loadingFrame);closeMenu(false);stop();
@@ -1221,7 +1224,7 @@ function applyRoute(path,restorePosition=false){
   const target=restorePosition&&Number.isFinite(state.scroll)?state.scroll:Math.max(0,sections[index].section.offsetTop-navBar.offsetHeight);
   window.scrollTo({top:target,behavior:'instant'});homePosition=target;
   document.title='MUTON.DES · 陈其林｜个人站';
-  renderHome(true);
+  renderHome(true);notifyAnalytics();
  }else{
   window.scrollTo({top:0,behavior:'instant'});
   const show=()=>{
@@ -1230,6 +1233,7 @@ function applyRoute(path,restorePosition=false){
    }else if(path==='/live'){showLivePage(reducedLiveMotion.matches||restorePosition?0:pageLoadDuration*1000);document.title='直播视觉 · MUTON.DES';}
    else if(path.startsWith('/case/')){showDetail(parts[2],Number(parts[3]),reducedLiveMotion.matches||restorePosition?0:pageLoadDuration*1000);document.title=detailInfo(parts[2],Number(parts[3])).title+' · MUTON.DES';}
    else{currentRoute='/projects';showProjectPage();}
+   notifyAnalytics();
   };
   if(restorePosition)show();else transitionToPage(show);
   activeScroller().scrollTop=restorePosition?(state.scroll||0):0;
