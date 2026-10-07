@@ -1207,7 +1207,7 @@ function navigate(path){
  applyRoute(path,false);
 }
 function notifyAnalytics(){
- try{const parts=currentRoute.split('/');const key=parts[1]==='case'?(parts[2]==='live'?'live:':'project:')+detailInfo(parts[2],Number(parts[3])).uid:currentRoute.startsWith('/home/')?'/home':currentRoute;window.MutonAnalytics?.page(key);}catch{}
+ try{const parts=currentRoute.split('/');const key=parts[1]==='case'?(parts[2]==='live'?'live:':'project:')+detailInfo(parts[2],Number(parts[3])).uid:currentRoute.startsWith('/home/')?'/home':currentRoute;window.MutonAnalyticsPage=key;window.MutonAnalytics?.page(key);}catch{}
 }
 function applyRoute(path,restorePosition=false){
  clearTimeout(routeSaveTimer);
