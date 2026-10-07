@@ -155,14 +155,17 @@ function updateHeroTyping(now){
  if(now-heroTypingLast<65||!siteReady||home.hidden||sections[0].section.getBoundingClientRect().bottom<=0)return;
  heroTypingLast=now;
  heroLabels.forEach(([label,positions],i)=>{
-  const group=sections[0].art.querySelector(`[data-typewriter="${i}"]`);if(!group)return;
+  const group=sections[0].art.querySelector(`[data-typewriter="${i}"]`);
   const typing=label.length*70,hold=8*800,deleting=label.length*55,period=typing+hold+deleting+700;
   const elapsed=Math.max(0,now-heroTypingStart-i*600),cycle=Math.floor(elapsed/period),t=elapsed%period;
   const n=reducedLiveMotion.matches?label.length:t<typing?Math.floor(t/70):t<typing+hold?label.length:Math.max(0,label.length-Math.floor((t-typing-hold)/55));
   const [x,y]=positions[reducedLiveMotion.matches?0:cycle%positions.length];
+  const value=label.slice(0,n),mobileLabel=sections[0].section.querySelector(`[data-mobile-typewriter="${i}"]`);
+  if(mobileLabel){const letters=mobileLabel.querySelector('span');if(letters.textContent!==value)letters.textContent=value;mobileLabel.classList.toggle('has-caret',n>0&&(reducedLiveMotion.matches||t<typing||t>=typing+hold||Math.floor((t-typing)/400)%2===0));}
+  if(!group)return;
   group.setAttribute('transform',`translate(${x} ${y})`);group.dataset.phase=t<typing?'typing':t<typing+hold?'holding':n?'deleting':'empty';
   const letters=group.querySelector('text'),caret=group.querySelector('rect');
-  const value=label.slice(0,n);if(letters.textContent!==value)letters.textContent=value;
+  if(letters.textContent!==value)letters.textContent=value;
   caret.setAttribute('x',letters.getComputedTextLength()+6);caret.setAttribute('y',-13);
   caret.setAttribute('opacity',n&&(reducedLiveMotion.matches||t<typing||t>=typing+hold||Math.floor((t-typing)/400)%2===0)?'1':'0');
  });
@@ -179,7 +182,7 @@ return out+pageLoading(seconds);
 }
 function service(){
  let out=text(960,115,'{ REAL SERVICE }',22,M,'text-anchor="middle"');
- const words=[['Let','design','take','place','within'],['real-world','business','operations.'],['让设计','发生在','真实业务','里面']];
+ const words=[['Let','design','take','place','within'],['real-world','business','operations.'],['让设计','在','真实业务里面','发生']];
  let count=0,n=Math.floor(clamp(p/.48)*12);
  words.forEach((row,i)=>{out+=`<text x="960" y="${208+i*80}" font-size="64" fill="${W}" text-anchor="middle" data-service-title="${i}">`+row.map((word,j)=>`<tspan opacity="${count++<n?1:0}">${esc(word)+(i<2&&j<row.length-1?' ':'')}</tspan>`).join('')+'</text>';});
  const logoReveal=ease(clamp((p-.54)/.36));
@@ -240,24 +243,26 @@ const ease=t=>t*t*(3-2*t);
 liveLayer.innerHTML=phoneNames.map((name,i)=>`<button type="button" class="muton-phone cursor-interaction" data-live-phone="${i}" aria-label="查看${esc(name)}的案例详情" aria-expanded="false"><span class="ml-device-back" aria-hidden="true"></span><span class="ml-device-key" aria-hidden="true"></span><span class="ml-device-key key-lower" aria-hidden="true"></span><span class="ml-device-key key-right" aria-hidden="true"></span><span class="ml-speaker" aria-hidden="true"></span><span class="muton-phone-screen ml-device-screen">${mediaMarkup(content.live[i].cover,'class="stage-screen-media"')}<span class="muton-phone-info" aria-hidden="true"><span class="muton-phone-info-title">${esc(name)}</span><span class="muton-phone-info-copy">${esc(content.live[i].summary)}</span></span></span></button>`).join('');
 const phoneButtons=[...liveLayer.querySelectorAll('button')];
 function positionPhones(){
- liveLayer.hidden=chapter!==3||p>=.86;
- const exit=ease(clamp((p-.72)/.14));
+ liveLayer.hidden=chapter!==3||p>=.9;
+ const exit=ease(clamp((p-.86)/.04));
+ const curtain=ease(clamp((p-.76)/.24));
+ liveLayer.style.clipPath=`inset(0 0 ${clamp(curtain*2)*100}% 0)`;
  liveLayer.style.opacity=1-exit;
  liveLayer.style.transform=`translateY(${-exit*8}%)`;
  liveLayer.style.pointerEvents='none';
  const angle=rotation+(running?ease(clamp((p-.15)/.45))*Math.PI*2/5:0);
  const centered=((Math.round(2-angle/(Math.PI*2/5))%5)+5)%5;
- const revealed=running?(p>=.60&&p<.72?centered:-1):infoPhone;
+ const revealed=running?(p>=.60&&p<.85?centered:-1):infoPhone;
  phoneButtons.forEach((button,i)=>{
   const theta=(i-2)*Math.PI*2/5+angle;
   const slot=Math.atan2(Math.sin(theta),Math.cos(theta))/(Math.PI*2/5),distance=Math.abs(slot),scale=1-.13*distance;
-  const x=960+Math.sign(slot)*(Math.min(distance,1)*350+Math.max(distance-1,0)*320),y=575+distance*15;
-  button.style.setProperty('--phone-scale',scale);button.style.width=(700*9/19)*scale/1920*100+'%';button.style.height=700*scale/1080*100+'%';
+  const x=960+Math.sign(slot)*(Math.min(distance,1)*350+Math.max(distance-1,0)*320)*1.06,y=535+distance*15.9;
+  button.style.setProperty('--phone-scale',scale);button.style.width=(742*9/19)*scale/1920*100+'%';button.style.height=742*scale/1080*100+'%';
   button.style.left=x/1920*100+'%';button.style.top=y/1080*100+'%';
   button.style.zIndex=String(Math.round((3-distance)*10));button.style.opacity=(1-.2*distance)*(1-ease(clamp((distance-2)/.5)));
-  button.style.pointerEvents=p<.72?'auto':'none';
+  button.style.pointerEvents=p<.85?'auto':'none';
   button.setAttribute('aria-pressed',String(i===phone));
-  const show=i===revealed&&p<.72&&!turning;
+  const show=i===revealed&&p<.85&&!turning;
   button.classList.toggle('is-revealed',show);button.setAttribute('aria-expanded',String(show));button.querySelector('.muton-phone-info').setAttribute('aria-hidden',String(!show));
  });
 }
@@ -267,10 +272,10 @@ function clearPhoneInfo(){
 }
 function revealPhoneInfo(index){
  clearTimeout(phoneInfoTimer);
- phoneInfoTimer=setTimeout(()=>{if(chapter===3&&!projectMode&&!livePageMode&&!detailMode&&!turning&&!running&&phone===index&&p<.72){infoPhone=index;positionPhones();}},140);
+ phoneInfoTimer=setTimeout(()=>{if(chapter===3&&!projectMode&&!livePageMode&&!detailMode&&!turning&&!running&&phone===index&&p<.85){infoPhone=index;positionPhones();}},140);
 }
 function rotateTo(index){
- if(turning||running||chapter!==3||p>=.72)return;
+ if(turning||running||chapter!==3||p>=.85)return;
  if(infoPhone===index)return;
  clearPhoneInfo();
  phone=index;
@@ -291,12 +296,12 @@ phoneButtons.forEach((button,i)=>{
  button.addEventListener('click',()=>openDetail('live',i+1));
 });
 function live(){
- let out=chapterTitle(115,'{ 全场景直播视觉方案 }');
+ let out=chapterTitle(90,'{ 全场景直播视觉方案 }');
  // The section's HTML link stays within the visible viewport.
- if(p>.72){
-  const t=ease(clamp((p-.72)/.28));
+ if(p>.76){
+  const t=ease(clamp((p-.76)/.24));
   if(t>=.5)out=about(0);
-  const curtainY=1080-2160*t,wordAlpha=ease(clamp((p-.80)/.04));
+  const curtainY=1080-2160*t,wordAlpha=ease(clamp((p-.83)/.04));
   const curtain=`<g data-transition="true" transform="translate(0 ${curtainY})">${rect(-1920,0,5760,1080,L)}${text(960,560,'BEHIND THE WORK',156,'#000',`font-weight="300" text-anchor="middle" letter-spacing="-3" opacity="${wordAlpha}" data-transition-title="true"`)}</g>`;
   out=`<g clip-path="url(#m-window)">${out}${curtain}</g>`;
  }
@@ -438,7 +443,7 @@ function projectEntries(){
  root.querySelector('#muton-menu-entry').hidden=loading;
  root.querySelector('#muton-contact-entry').hidden=loading;
  allProjectsEntry.hidden=projectMode||livePageMode||detailMode||menuOpen||chapter!==2;
- root.querySelector('#muton-all-live').hidden=projectMode||livePageMode||detailMode||menuOpen||chapter!==3||p>=.72;
+ root.querySelector('#muton-all-live').hidden=projectMode||livePageMode||detailMode||menuOpen||chapter!==3||p>=.85;
  root.querySelector('#muton-home-entry').hidden=loading;
 }
 function leaveProjects(){
@@ -1156,13 +1161,13 @@ const skip=document.createElement('a');skip.className='skip-link';skip.href='#/h
 
 // Mobile reflows the same confirmed content; desktop keeps the original compositions.
 const mobileBody=(i)=>{
- if(i===0)return `<div class="mobile-hero-copy"><h1>从品牌识别<br>到商业现场。</h1><p>陈其林<br>品牌视觉 Design Lead</p><p>用系统建立识别，用创意连接业务。<br>从关键视觉主创，到团队与项目统筹。</p><a href="#/home/works">探索我的作品 ↘</a></div>`;
- if(i===1)return `<p class="section-kicker">{ REAL SERVICE }</p><h2>${['Let','design','take','place','within','real-world','business','operations.'].map(word=>`<span data-service-word>${word}</span>`).join(' ')}</h2><h2>${['让设计','发生在','真实业务','里面'].map((word,i)=>`${i===2?'<br>':''}<span data-service-word>${word}</span>`).join('')}</h2><div class="mobile-logos">${content.logos.map((a,i)=>`<span class="mobile-logo" role="img" aria-label="${esc(a.label)}"><img data-media-src="${a.src}" alt="" width="1536" height="768" style="left:${-(i%8)*100}%;top:${-Math.floor(i/8)*100}%"></span>`).join('')}</div>`;
+ if(i===0)return `<div class="mobile-hero-labels" aria-hidden="true">${heroLabels.map((_,i)=>`<div data-mobile-typewriter="${i}"><span></span></div>`).join('')}</div><div class="mobile-hero-copy"><h1>从品牌识别<br>到商业现场。</h1><p>陈其林<br>品牌视觉 Design Lead</p><p>用系统建立识别，用创意连接业务。<br>从关键视觉主创，到团队与项目统筹。</p><a href="#/home/works">探索我的作品 ↘</a></div>`;
+ if(i===1)return `<p class="section-kicker">{ REAL SERVICE }</p><h2>${['Let','design','take','place','within','real-world','business','operations.'].map(word=>`<span data-service-word>${word}</span>`).join(' ')}</h2><h2>${['让设计','在','真实业务里面','发生'].map((word,i)=>`${i===2?'<br>':''}<span data-service-word>${word}</span>`).join('')}</h2><div class="mobile-logos">${content.logos.map((a,i)=>`<span class="mobile-logo" role="img" aria-label="${esc(a.label)}"><img data-media-src="${a.src}" alt="" width="1536" height="768" style="left:${-(i%8)*100}%;top:${-Math.floor(i/8)*100}%"></span>`).join('')}</div>`;
  if(i===2)return `<h2 class="section-kicker">{ 我的精选作品 }</h2><div class="mobile-works">${content.featured.map((id,i)=>{const a=projects[id-1];return `<a class="mobile-work" href="#/case/work/${i+1}">${mediaMarkup(a.cover,'data-preview')}<span>${esc(a.tag||a.category)}</span><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p><i aria-hidden="true">↗</i></a>`;}).join('')}</div><a class="outline-link" href="#/projects">SEE ALL PROJECTS →</a>`;
  if(i===3)return `<div class="mobile-live-pin"><h2 class="section-kicker">{ 全场景直播视觉方案 }</h2><div class="mobile-phones">${content.live.map((a,i)=>`<a href="#/case/live/${i+1}"><div class="mobile-device">${mediaMarkup(a.cover,'class="stage-screen-media"')}</div><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p></a>`).join('')}</div><a class="outline-link" href="#/live">SEE ALL LIVE SCENES →</a><div class="mobile-behind">BEHIND<br>THE WORK</div></div>`;
  if(i===4)return `<p class="section-kicker">{ ABOUT ME }</p><img class="mobile-portrait" data-media-src="${content.portrait.src}" alt="陈其林个人照片"><h2>亲自设计<br>也让好的设计<br>持续发生。</h2><p>在品牌策划公司、广告集团与消费品牌甲方积累经验，将品牌识别、内容传播和商业场景连接起来。</p><p>亲自做好关键设计，也让团队的交付持续向前。</p><div class="mobile-stats"><p>2020—2026<small>品牌与商业视觉实践</small></p><p>杭州<small>品牌视觉 · 设计统筹</small></p></div>`;
  if(i===5)return `<h2>工作路径</h2><p class="section-kicker">EXPERIENCE / 2020–2026</p>${content.jobs.map((job,i)=>`<details><summary><small>${esc(job.years)}</small><span>${esc(job.company)}</span><small>${esc(jobs[i][2])}</small></summary>${job.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</details>`).join('')}`;
- if(i===6)return `<div class="mobile-capability-pin"><h2>π 型能力<br>有深度，也有连接。</h2><div class="mobile-pi" aria-hidden="true">π</div>${caps.map((c,i)=>`<div class="mobile-capability"><p>0${i+1} / ${esc(c[0])}</p><h3>${c[2].map(esc).join('<br>')}</h3><a class="green" href="#${['/case/project/1','/case/project/23','/home/experience'][i]}">${esc(c[3])}</a></div>`).join('')}</div>`;
+ if(i===6)return `<div class="mobile-capability-pin"><h2>${['π 型能力','有深度，也有连接。'].map(row=>`<span class="capability-title-line">${[...row].map(char=>`<span data-capability-letter>${esc(char)}</span>`).join('')}</span>`).join('')}</h2><img class="mobile-pi" data-media-src="assets/web/capability-pi.webp" width="768" height="900" alt="" aria-hidden="true">${caps.map((c,i)=>`<div class="mobile-capability"><p>0${i+1} / ${esc(c[0])}</p><h3>${c[2].map(esc).join('<br>')}</h3><a class="green" href="#${['/case/project/1','/case/project/23','/home/experience'][i]}">${esc(c[3])}</a></div>`).join('')}</div>`;
  return `<p class="section-kicker">{ NEXT CHAPTER }</p><a href="#/home/top" class="mobile-top">回到顶部 ↑</a><h2>下一个项目。</h2><a class="contact-start" href="mailto:muton2.45@gmail.com">一起 <span class="green">开始 ↘</span></a><p class="contact-description">期待品牌视觉与设计管理的工作机会，<br>也欢迎品牌全案、商业视觉与产品设计合作。</p><a class="contact-line" href="tel:17729854302"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">${contactIcon('phone')}</svg>17729854302</a><a class="contact-line" href="mailto:muton2.45@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">${contactIcon('email')}</svg>muton2.45@gmail.com</a><button data-copy-email>复制邮箱</button><p class="mobile-copyright">© 2026 陈其林<br>品牌视觉 / Design Lead</p><div class="contact-qrs"><figure><img data-media-src="assets/contact-wechat.png" alt="联系微信二维码"><figcaption>联系微信</figcaption></figure><figure><img data-media-src="assets/contact-zcool.png" alt="站酷首页二维码"><figcaption>站酷首页</figcaption></figure></div><div class="mobile-talk" aria-hidden="true">LET’S TALK</div>`;
 };
 sections.forEach(({section},i)=>{const body=document.createElement('div');body.className='mobile-content';body.innerHTML=mobileBody(i);section.append(body);});
@@ -1237,7 +1242,7 @@ function chapterProgress(i,ratio){
  if(i===0)return 1;
  if(i===1)return .9*ratio;
  if(i===2)return .2+.8*ratio;
- if(i===3)return .719+.281*ratio;
+ if(i===3)return .68+.32*ratio;
  if(i===4)return .2;
  if(i===5)return .1;
  if(i===6)return .03+.97*ratio;
@@ -1252,7 +1257,7 @@ function renderSection(i,value){
 }
 function sizeSections(){
  const h=Math.min(innerWidth*1080/1920,innerHeight-92),width=h*1920/1080;
- const extras=[0,h*.8,width*2280/1920,h,0,0,h*2.8,0];
+ const extras=[0,h*.8,width*2280/1920,h*1.35,0,0,h*2.8,0];
  sections.forEach(({section,scene},i)=>{
   const hero=i===0,sceneH=hero?innerWidth*1080/1920:h;
   section.style.setProperty('--scene-height',sceneH+'px');
@@ -1268,7 +1273,7 @@ function syncSectionLinks(){
  [allWork,allLive].forEach((button,j)=>{
   const i=j+2,elapsed=performance.now()-sectionTitleTimes[i];
   const count=[...['{ 我的精选作品 }','{ 全场景直播视觉方案 }'][j]].length;
-  button.hidden=!inHome||visibleSection!==i||(!reducedLiveMotion.matches&&elapsed<count*70)||(j===1&&sections[3].last>.735);
+  button.hidden=!inHome||visibleSection!==i||(!reducedLiveMotion.matches&&elapsed<count*70)||(j===1&&sections[3].last>.79);
  });
 }
 function renderMobileMotion(){
@@ -1283,20 +1288,16 @@ function renderMobileMotion(){
   card.style.transform=reducedLiveMotion.matches?'none':`translateY(${(1-entry)*36-clamp((height*.4-box.top)/height,-1,1)*18}px) scale(${.96+.04*entry})`;
   card.style.opacity=reducedLiveMotion.matches?1:.3+.7*entry;
  });
- const live=sections[3].section,liveBox=live.getBoundingClientRect(),phones=live.querySelector('.mobile-phones');
- const liveProgress=clamp((64-liveBox.top)/Math.max(1,live.offsetHeight-height));
- if(!reducedLiveMotion.matches){
-  phones.scrollLeft=clamp(liveProgress/.82)*(phones.scrollWidth-phones.clientWidth);
-  live.querySelector('.mobile-behind').style.transform=`translateY(${(1-ease(clamp((liveProgress-.88)/.12)))*110}%)`;
- }
  const section=sections[6].section,box=section.getBoundingClientRect(),progress=clamp((64-box.top)/Math.max(1,section.offsetHeight-height));
- const pi=section.querySelector('.mobile-pi');pi.style.transform=reducedLiveMotion.matches?'none':`translate3d(${-progress*8}%,${28-progress*48}%,0) rotate(${-5+progress*10}deg)`;
+ const pi=section.querySelector('.mobile-pi');pi.style.transform=reducedLiveMotion.matches?'none':`translate3d(0,${32-progress*70}%,0)`;
  section.querySelectorAll('.mobile-capability').forEach((card,i)=>{
   const step=progress*3-i,alpha=clamp(step*5)*clamp((1-step)*5);
   card.style.opacity=reducedLiveMotion.matches?1:alpha;card.style.transform=reducedLiveMotion.matches?'none':`translateY(${(1-clamp(step/.3))*50-Math.max(0,step-.85)*100}px)`;
   card.inert=!reducedLiveMotion.matches&&alpha<.2;
  });
- section.querySelector('h2').style.opacity=reducedLiveMotion.matches?1:1-clamp(progress*5);
+ const title=section.querySelector('h2'),entry=clamp((height*.82-box.top)/(height*.5));
+ title.querySelectorAll('[data-capability-letter]').forEach((letter,i)=>{const reveal=reducedLiveMotion.matches?1:clamp(entry*19-i);letter.style.opacity=reveal;letter.style.transform=`translateY(${(1-reveal)*.6}em)`;});
+ title.style.opacity=reducedLiveMotion.matches?1:1-clamp((progress-.17)/.11);
  pumpMedia();
 }
 function renderHome(force=false){

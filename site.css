@@ -53,7 +53,7 @@ button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:i
  .mobile-phones{display:flex;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -22px;padding:0 42px 20px}.mobile-phones>a{flex:0 0 78%;scroll-snap-align:center}.mobile-device{background:linear-gradient(120deg,#666,#111 25%,#555);padding:6px;border-radius:30px;box-shadow:8px 8px 0 #191919}.mobile-device>img,.mobile-device>video{width:100%;height:auto;aspect-ratio:9/19;object-fit:cover;border-radius:24px;display:block}.mobile-phones h3{font-size:22px}.mobile-phones p{font-size:13px}.mobile-behind{background:#0000f0;color:#000;font-size:16vw;line-height:1.1;margin:60px -22px -52px;padding:55px 22px}
  .mobile-portrait{display:block;width:80%;height:auto;filter:grayscale(1);margin-bottom:35px}.mobile-stats{display:flex;gap:35px;border-top:1px solid #333;margin-top:32px}.mobile-stats p{font-size:22px}.mobile-stats small{display:block;font-size:12px}
  #experience details{border-top:1px solid #333;padding:22px 0}#experience summary{list-style:none;cursor:pointer}#experience summary::after{content:'+';float:right;color:#60f030;font-size:26px}#experience details[open] summary::after{content:'×'}#experience summary span{display:block;font-size:22px;margin:7px 0}#experience summary small{font-size:12px;color:#aaa}#experience details p{font-size:14px}
- #capabilities{overflow:hidden}.mobile-pi{position:absolute;left:-10%;top:120px;z-index:0;font:bold 130vw/1 Arial;color:#000074;text-shadow:10px 8px #000034;pointer-events:none}.mobile-capability{position:relative;z-index:1;margin-top:140px}.mobile-capability h3{font-size:29px;line-height:1.55}.mobile-capability:nth-last-child(2){padding-left:12%}.green,.mobile-content p.green{color:#60f030}
+ #capabilities{overflow:hidden}.mobile-pi{position:absolute;z-index:0;pointer-events:none}.mobile-capability{position:relative;z-index:1;margin-top:140px}.mobile-capability h3{font-size:29px;line-height:1.55}.mobile-capability:nth-last-child(2){padding-left:12%}.green,.mobile-content p.green{color:#60f030}
  #contact{background:#0000f0;position:relative;padding-bottom:0}#contact .section-kicker{text-align:left}#contact p{color:#d9e0ff}#contact .mobile-top{display:block;font-size:12px;margin-bottom:55px}#contact h2{font-size:42px;margin-bottom:8px}.contact-start{display:block;font-size:28px;margin-bottom:42px}#contact [data-copy-email]{display:block;border:1px solid #60f030;color:#60f030;border-radius:4px;background:none;padding:8px 12px;margin-top:14px}#contact .mobile-copyright{font-size:12px;margin-top:70px}.mobile-talk{font-weight:900;font-size:17vw;letter-spacing:-1vw;color:#000;white-space:nowrap;margin-top:30px}
  #muton-storyboard .muton-menu-body{display:block;padding:25px 25px 0;overflow-y:auto}#muton-storyboard .muton-menu-primary button{font-size:36px;padding:7px 0;gap:18px}#muton-storyboard .muton-menu-primary button>span{font-size:11px}#muton-storyboard .muton-menu-primary i{font-size:26px}#muton-storyboard .muton-menu-aside{font-size:15px;line-height:1.7;padding:30px 0;gap:20px}#muton-storyboard .muton-menu-aside p>span{font-size:13px}#muton-storyboard .menu-portrait{display:none}#muton-storyboard .muton-menu-shortcuts button,#muton-storyboard .muton-menu-email{font-size:14px;padding:7px 0}#muton-storyboard .muton-menu-bottom{font-size:12px;margin:0 25px;padding:15px 0}
  #muton-storyboard .muton-project-intro{height:auto;padding:30px 18px 18px}#muton-storyboard .muton-project-intro h2{font-size:38px;gap:12px}#muton-storyboard .muton-project-intro h2>span{width:9px;height:9px}#muton-storyboard #muton-project-categories{max-width:none;margin:22px 0;gap:10px 16px}#muton-storyboard #muton-project-categories button{font-size:13px;line-height:1.5}#muton-storyboard #muton-project-search{position:static;font-size:18px;width:100%;padding:8px 0}#muton-storyboard .muton-project-body{grid-template-columns:1fr}#muton-storyboard .muton-project-preview{display:none}#muton-storyboard .muton-project-row{min-height:105px;padding:20px 35px 20px 18px;gap:12px;color:#888}#muton-storyboard .muton-project-index{font-size:10px;padding-top:5px}#muton-storyboard .muton-project-title{font-size:25px}#muton-storyboard .muton-project-arrow{font-size:23px;right:14px;bottom:16px}#muton-storyboard .muton-project-empty{font-size:15px;padding:24px}
@@ -152,27 +152,28 @@ button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:i
  .contact-line{margin:8px 0}
 }
 
-/* Phone scroll scenes retain readable content and the desktop progression. */
+/* Phone livestreams scroll freely; capabilities retain their staged reveal. */
 @media(max-width:700px){
  #live>.mobile-content,#capabilities>.mobile-content{height:100%}
- #live{height:calc(100svh * 5)!important;padding:0 22px}
- .mobile-live-pin{position:sticky;top:64px;height:calc(100svh - 64px);overflow:hidden;padding-top:22px;box-sizing:border-box}
+ #live{height:auto!important;padding:36px 22px 0}
+ .mobile-live-pin{position:relative;overflow:visible;padding:0;box-sizing:border-box}
  .mobile-live-pin .section-kicker{margin-bottom:22px}
- .mobile-phones{scroll-snap-type:none;scrollbar-width:none;padding-bottom:0;overflow-x:auto}
+ .mobile-phones{scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:0;overflow-x:auto}
  .mobile-phones::-webkit-scrollbar{display:none}
  .mobile-phones>a{flex-basis:76%}
- .mobile-device{position:relative;width:min(100%,calc((100svh - 380px)*.473684));margin:auto}
+ .mobile-device{position:relative;width:min(100%,190px);margin:auto}
  #muton-storyboard .mobile-device>.stage-screen-media{position:static;height:auto;aspect-ratio:9/19}
  .mobile-phones h3{font-size:18px;line-height:1.4;margin:14px 0 6px}
  .mobile-phones p{font-size:12px;line-height:1.6;margin:0}
  .mobile-live-pin .outline-link{margin:20px auto 0}
- .mobile-behind{position:absolute;inset:0;background:#0000f0;margin:0;display:flex;align-items:center;justify-content:center;padding:20px;font-size:16vw;pointer-events:none;z-index:2}
+ .mobile-behind{position:relative;background:#0000f0;height:40svh;min-height:220px;margin:52px -22px 0;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;font-size:16vw;pointer-events:none}
  #capabilities{height:calc(100svh * 4)!important;overflow:visible;padding:0 22px}
  .mobile-capability-pin{position:sticky;top:64px;height:calc(100svh - 64px);overflow:hidden;padding-top:28px}
  .mobile-capability-pin>h2{position:relative;z-index:1}
- .mobile-capability-pin .mobile-pi{top:14%;left:-8%;font-size:140vw}
- .mobile-capability-pin .mobile-capability{position:absolute;left:0;right:0;top:34%;margin:0;padding:0 8px}
- .mobile-capability-pin .mobile-capability:nth-last-child(2){padding-left:12%}
+ .mobile-capability-pin .mobile-pi{top:0;left:-22%;width:144%;height:auto;max-width:none;will-change:transform}
+ .mobile-capability-pin .mobile-capability{position:absolute;left:0;right:0;top:31%;margin:0;padding:0 8px}
+ .mobile-capability-pin .mobile-capability:nth-last-child(2){top:17%;padding-left:12%}
+ .mobile-capability-pin .mobile-capability:last-child{top:34%}
  .mobile-capability h3{font-size:28px;line-height:1.55}
  [data-media-state="error"]{cursor:pointer;background:#101018;outline:1px solid #30303b}
  .mobile-work{will-change:transform,opacity}
@@ -189,3 +190,19 @@ button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:i
 
 #muton-storyboard #top .home-scene.hero-playing{background-image:none}
 @media(max-width:700px){[data-service-word]{display:inline-block}#services .mobile-content h2:nth-of-type(2){max-width:280px;margin-left:auto;margin-right:auto}}
+
+@media(max-width:700px){
+ #top .mobile-content{display:grid;grid-template-rows:minmax(70px,1fr) auto;padding-top:42px;overflow:hidden}
+ .mobile-hero-labels{position:relative;align-self:stretch;min-height:70px;overflow:hidden;pointer-events:none;color:#b9b9c6;font:11px/1.4 Arial,sans-serif;letter-spacing:.02em}
+ .mobile-hero-labels>div{position:absolute;white-space:nowrap;left:0;top:12%}
+ .mobile-hero-labels>div:nth-child(2){left:62%;top:48%}
+ .mobile-hero-labels>div:nth-child(3){left:12%;top:78%}
+ .mobile-hero-labels .has-caret::after{content:'';display:inline-block;width:5px;height:10px;margin-left:4px;background:currentColor}
+ #experience .mobile-content>h2{margin-bottom:8px}
+ #experience .mobile-content>.section-kicker{text-align:left;margin-bottom:30px}
+ .capability-title-line{display:block;white-space:nowrap}
+ [data-capability-letter]{display:inline-block;white-space:pre}
+}
+@media(max-width:700px) and (prefers-reduced-motion:reduce){
+ .mobile-capability-pin .mobile-capability:nth-last-child(2),.mobile-capability-pin .mobile-capability:last-child{top:auto}
+}
