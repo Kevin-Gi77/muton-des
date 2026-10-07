@@ -184,10 +184,10 @@ function service(){
  let out=text(960,115,'{ REAL SERVICE }',22,M,'text-anchor="middle"');
  const words=[['Let','design','take','place','within'],['real-world','business','operations.'],['让设计','在','真实业务里面','发生']];
  let count=0,n=Math.floor(clamp(p/.48)*12);
- words.forEach((row,i)=>{out+=`<text x="960" y="${208+i*80}" font-size="64" fill="${W}" text-anchor="middle" data-service-title="${i}">`+row.map((word,j)=>`<tspan opacity="${count++<n?1:0}">${esc(word)+(i<2&&j<row.length-1?' ':'')}</tspan>`).join('')+'</text>';});
+ words.forEach((row,i)=>{out+=`<text x="960" y="${208+i*80+(i===2?30:0)}" font-size="64" fill="${W}" text-anchor="middle" data-service-title="${i}">`+row.map((word,j)=>`<tspan opacity="${count++<n?1:0}">${esc(word)+(i<2&&j<row.length-1?' ':'')}</tspan>`).join('')+'</text>';});
  const logoReveal=ease(clamp((p-.54)/.36));
  out+=`<g id="m-logo-matrix" opacity="${logoReveal}" transform="translate(0 ${(1-logoReveal)*110})" style="pointer-events:${logoReveal>.95?'auto':'none'}">`;
- brands.forEach((b,i)=>{const row=Math.floor(i/8),x=330+i%8*180,y=530+row*154;out+=`<g data-logo="${i}" tabindex="0" class="cursor-interaction" aria-label="${esc(b)}"><clipPath id="m-service-logo-${i}"><circle cx="${x}" cy="${y}" r="62"/></clipPath><circle cx="${x}" cy="${y}" r="62" fill="#fff"/><g clip-path="url(#m-service-logo-${i})"><svg x="${x-56}" y="${y-56}" width="112" height="112" viewBox="${i%8*192} ${Math.floor(i/8)*192} 192 192" overflow="hidden"><image data-media-src="${content.logos[i].src}" width="1536" height="768"/></svg></g></g>`;});
+ brands.forEach((b,i)=>{const row=Math.floor(i/8),x=330+i%8*180,y=572+row*154;out+=`<g data-logo="${i}" tabindex="0" class="cursor-interaction" aria-label="${esc(b)}"><clipPath id="m-service-logo-${i}"><circle cx="${x}" cy="${y}" r="62"/></clipPath><circle cx="${x}" cy="${y}" r="62" fill="#fff"/><g clip-path="url(#m-service-logo-${i})"><svg x="${x-56}" y="${y-56}" width="112" height="112" viewBox="${i%8*192} ${Math.floor(i/8)*192} 192 192" overflow="hidden"><image data-media-src="${content.logos[i].src}" width="1536" height="768"/></svg></g></g>`;});
  out+='</g>';
  return out;
 }
@@ -296,7 +296,7 @@ phoneButtons.forEach((button,i)=>{
  button.addEventListener('click',()=>openDetail('live',i+1));
 });
 function live(){
- let out=chapterTitle(90,'{ 全场景直播视觉方案 }');
+ let out=chapterTitle(62,'{ 全场景直播视觉方案 }');
  // The section's HTML link stays within the visible viewport.
  if(p>.76){
   const t=ease(clamp((p-.76)/.24));
@@ -368,13 +368,13 @@ function contactIcon(kind){
  return `<circle cx="12" cy="12" r="10.5" fill="none"/>${shape}`;
 }
 function footerContent(){
- return rect(-1920,0,5760,1080,L)+text(38,130,'{ NEXT CHAPTER }',28,'#fff')+text(1880,130,'回到顶部 ↑',20,W,'text-anchor="end"')+text(38,355,'下一个项目。',72,W,'font-weight="700"')+text(38,465,'一起',72,W,'font-weight="700"')+text(204,465,'开始 ↘',72,G,'font-weight="700"')+lines(1000,325,['期待品牌视觉与设计管理的工作机会，','也欢迎品牌全案、商业视觉与产品设计合作。'],26,'#d9e0ff',45,'font-weight="300"')+
+ return rect(-1920,0,5760,1080,L)+text(38,130,'{ NEXT CHAPTER }',28,'#fff')+text(1880,130,'回到顶部 ↑',20,W,'text-anchor="end"')+text(38,326,'下一个项目。',88,W,'font-weight="700" data-contact-title')+text(38,454,'一起',88,W,'font-weight="700"')+text(236,454,'开始 ↘',88,G,'font-weight="700"')+`<g data-contact-details transform="translate(0 -60)">`+lines(1000,325,['期待品牌视觉与设计管理的工作机会，','也欢迎品牌全案、商业视觉与产品设计合作。'],26,'#d9e0ff',45,'font-weight="300"')+
  `<svg x="1000" y="421" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="${W}" color="${W}" stroke-width="1.2">${contactIcon('phone')}</svg>`+text(1042,445,'17729854302',30,W,'font-weight="300"')+
  `<svg x="1000" y="476" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="${W}" color="${W}" stroke-width="1.2">${contactIcon('email')}</svg>`+text(1042,500,'muton2.45@gmail.com',30,W,'font-weight="300"')+
- rect(1000,555,150,48,'none',`rx="4" stroke="${G}"`)+text(1075,587,'复制邮箱',22,G,'text-anchor="middle"')+
- `<image class="contact-qr" data-media-src="assets/contact-wechat.png" x="1470" y="600" width="160" height="160"/><image class="contact-qr" data-media-src="assets/contact-zcool.png" x="1710" y="600" width="160" height="160"/>`+
- text(1550,780,'联系微信',16,W,'text-anchor="middle" font-weight="300"')+text(1790,780,'站酷首页',16,W,'text-anchor="middle" font-weight="300"')+
- text(38,780,'© 2026 陈其林',16,'#d9e0ff','font-weight="300"')+text(900,780,'品牌视觉 / Design Lead',16,'#d9e0ff','font-weight="300"')+text(38,1038,"LET’S TALK",298,'#000','font-weight="900" textLength="1844" lengthAdjust="spacingAndGlyphs"');
+ rect(1000,555,150,48,'none',`rx="4" stroke="${G}"`)+text(1075,587,'复制邮箱',22,G,'text-anchor="middle"')+'</g>'+
+ `<image class="contact-qr" data-media-src="assets/contact-wechat.png" x="1478" y="580" width="144" height="144"/><image class="contact-qr" data-media-src="assets/contact-zcool.png" x="1718" y="580" width="144" height="144"/>`+
+ text(1550,770,'联系微信',16,W,'text-anchor="middle" font-weight="300" letter-spacing="8"')+text(1790,770,'站酷首页',16,W,'text-anchor="middle" font-weight="300" letter-spacing="8"')+
+ text(38,748,'© 2026 陈其林',16,'#d9e0ff','font-weight="300"')+text(38,780,'品牌视觉 / Design Lead',16,'#d9e0ff','font-weight="300"')+text(38,1038,"LET’S TALK",298,'#000','font-weight="900" textLength="1844" lengthAdjust="spacingAndGlyphs"');
 }
 function footer(progress=p){
  const offset=clamp(progress)*1080;
@@ -1162,9 +1162,9 @@ const skip=document.createElement('a');skip.className='skip-link';skip.href='#/h
 // Mobile reflows the same confirmed content; desktop keeps the original compositions.
 const mobileBody=(i)=>{
  if(i===0)return `<div class="mobile-hero-labels" aria-hidden="true">${heroLabels.map((_,i)=>`<div data-mobile-typewriter="${i}"><span></span></div>`).join('')}</div><div class="mobile-hero-copy"><h1>从品牌识别<br>到商业现场。</h1><p>陈其林<br>品牌视觉 Design Lead</p><p>用系统建立识别，用创意连接业务。<br>从关键视觉主创，到团队与项目统筹。</p><a href="#/home/works">探索我的作品 ↘</a></div>`;
- if(i===1)return `<p class="section-kicker">{ REAL SERVICE }</p><h2>${['Let','design','take','place','within','real-world','business','operations.'].map(word=>`<span data-service-word>${word}</span>`).join(' ')}</h2><h2>${['让设计','在','真实业务里面','发生'].map((word,i)=>`${i===2?'<br>':''}<span data-service-word>${word}</span>`).join('')}</h2><div class="mobile-logos">${content.logos.map((a,i)=>`<span class="mobile-logo" role="img" aria-label="${esc(a.label)}"><img data-media-src="${a.src}" alt="" width="1536" height="768" style="left:${-(i%8)*100}%;top:${-Math.floor(i/8)*100}%"></span>`).join('')}</div>`;
+ if(i===1)return `<p class="section-kicker">{ REAL SERVICE }</p><h2>${[['Let','design','take','place'],['within','real-world'],['business','operations.']].map(row=>`<span class="mobile-service-line">${row.map(word=>`<span data-service-word>${word}</span>`).join(' ')}</span>`).join(' ')}</h2><h2>${['让设计','在','真实业务里面','发生'].map((word,i)=>`${i===2?'<br>':''}<span data-service-word>${word}</span>`).join('')}</h2><div class="mobile-logos">${content.logos.map((a,i)=>`<span class="mobile-logo" role="img" aria-label="${esc(a.label)}"><img data-media-src="${a.src}" alt="" width="1536" height="768" style="left:${-(i%8)*100}%;top:${-Math.floor(i/8)*100}%"></span>`).join('')}</div>`;
  if(i===2)return `<h2 class="section-kicker">{ 我的精选作品 }</h2><div class="mobile-works">${content.featured.map((id,i)=>{const a=projects[id-1];return `<a class="mobile-work" href="#/case/work/${i+1}">${mediaMarkup(a.cover,'data-preview')}<span>${esc(a.tag||a.category)}</span><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p><i aria-hidden="true">↗</i></a>`;}).join('')}</div><a class="outline-link" href="#/projects">SEE ALL PROJECTS →</a>`;
- if(i===3)return `<div class="mobile-live-pin"><h2 class="section-kicker">{ 全场景直播视觉方案 }</h2><div class="mobile-phones">${content.live.map((a,i)=>`<a href="#/case/live/${i+1}"><div class="mobile-device">${mediaMarkup(a.cover,'class="stage-screen-media"')}</div><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p></a>`).join('')}</div><a class="outline-link" href="#/live">SEE ALL LIVE SCENES →</a><div class="mobile-behind">BEHIND<br>THE WORK</div></div>`;
+ if(i===3)return `<div class="mobile-live-pin"><h2 class="section-kicker">{ 全场景直播视觉方案 }</h2><div class="mobile-phones">${content.live.map((a,i)=>`<a href="#/case/live/${i+1}"><div class="mobile-device">${mediaMarkup(a.cover,'class="stage-screen-media"')}</div><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p></a>`).join('')}</div><a class="outline-link" href="#/live">SEE ALL LIVE SCENES →</a><div class="mobile-behind"><div class="mobile-behind-curtain"><span>BEHIND<br>THE WORK</span></div></div></div>`;
  if(i===4)return `<p class="section-kicker">{ ABOUT ME }</p><img class="mobile-portrait" data-media-src="${content.portrait.src}" alt="陈其林个人照片"><h2>亲自设计<br>也让好的设计<br>持续发生。</h2><p>在品牌策划公司、广告集团与消费品牌甲方积累经验，将品牌识别、内容传播和商业场景连接起来。</p><p>亲自做好关键设计，也让团队的交付持续向前。</p><div class="mobile-stats"><p>2020—2026<small>品牌与商业视觉实践</small></p><p>杭州<small>品牌视觉 · 设计统筹</small></p></div>`;
  if(i===5)return `<h2>工作路径</h2><p class="section-kicker">EXPERIENCE / 2020–2026</p>${content.jobs.map((job,i)=>`<details><summary><small>${esc(job.years)}</small><span>${esc(job.company)}</span><small>${esc(jobs[i][2])}</small></summary>${job.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</details>`).join('')}`;
  if(i===6)return `<div class="mobile-capability-pin"><h2>${['π 型能力','有深度，也有连接。'].map(row=>`<span class="capability-title-line">${[...row].map(char=>`<span data-capability-letter>${esc(char)}</span>`).join('')}</span>`).join('')}</h2><img class="mobile-pi" data-media-src="assets/web/capability-pi.webp" width="768" height="900" alt="" aria-hidden="true">${caps.map((c,i)=>`<div class="mobile-capability"><p>0${i+1} / ${esc(c[0])}</p><h3>${c[2].map(esc).join('<br>')}</h3><a class="green" href="#${['/case/project/1','/case/project/23','/home/experience'][i]}">${esc(c[3])}</a></div>`).join('')}</div>`;
@@ -1220,7 +1220,7 @@ function applyRoute(path,restorePosition=false){
   const index=Math.max(0,sectionIds.indexOf(path.split('/')[2]));
   const target=restorePosition&&Number.isFinite(state.scroll)?state.scroll:Math.max(0,sections[index].section.offsetTop-navBar.offsetHeight);
   window.scrollTo({top:target,behavior:'instant'});homePosition=target;
-  document.title='MUTON.DES · 陈其林 | 品牌视觉 / Design Lead';
+  document.title='MUTON.DES · 陈其林｜个人站';
   renderHome(true);
  }else{
   window.scrollTo({top:0,behavior:'instant'});
@@ -1255,7 +1255,13 @@ function renderSection(i,value){
  if(i===5){const heights=[...svg.querySelectorAll('[data-job], [data-job-description]')].map(el=>{const b=el.getBBox();return b.y+b.height+100;});const height=Math.max(1080,...heights);svg.setAttribute('viewBox',`0 0 1920 ${height}`);sections[i].scene.style.height=`${height/1920*sections[i].scene.clientWidth}px`;}
  sections[i].last=value;
 }
+let mobileHeroWidth=0;
 function sizeSections(){
+ if(mobile.matches){
+  const width=document.documentElement.clientWidth;
+  // Browser chrome can resize the viewport while scrolling; keep the hero crop stable.
+  if(width!==mobileHeroWidth){mobileHeroWidth=width;sections[0].section.style.setProperty('--mobile-hero-height',Math.max(0,innerHeight-48)+'px');}
+ }else mobileHeroWidth=0;
  const h=Math.min(innerWidth*1080/1920,innerHeight-92),width=h*1920/1080;
  const extras=[0,h*.8,width*2280/1920,h*1.35,0,0,h*2.8,0];
  sections.forEach(({section,scene},i)=>{
@@ -1288,6 +1294,15 @@ function renderMobileMotion(){
   card.style.transform=reducedLiveMotion.matches?'none':`translateY(${(1-entry)*36-clamp((height*.4-box.top)/height,-1,1)*18}px) scale(${.96+.04*entry})`;
   card.style.opacity=reducedLiveMotion.matches?1:.3+.7*entry;
  });
+ const behind=sections[3].section.querySelector('.mobile-behind'),behindBox=behind.getBoundingClientRect();
+ const entering=ease(clamp((height-behindBox.top)/Math.max(1,behindBox.height))),leaving=clamp(-behindBox.top/Math.max(1,behindBox.height));
+ const curtain=behind.firstElementChild,label=curtain.firstElementChild;
+ curtain.style.transform=reducedLiveMotion.matches?'none':`translateY(${(1-entering)*100}%)`;
+ label.style.opacity=reducedLiveMotion.matches?1:clamp(entering*2);
+ label.style.transform=reducedLiveMotion.matches?'none':`translateY(${(1-entering)*40-leaving*35}px)`;
+ const about=sections[4].section,aboutBody=about.querySelector('.mobile-content'),aboutReveal=ease(clamp((height-about.getBoundingClientRect().top)/(height*.35)));
+ aboutBody.style.opacity=reducedLiveMotion.matches?1:.45+.55*aboutReveal;
+ aboutBody.style.transform=reducedLiveMotion.matches?'none':`translateY(${(1-aboutReveal)*24}px)`;
  const section=sections[6].section,box=section.getBoundingClientRect(),progress=clamp((64-box.top)/Math.max(1,section.offsetHeight-height));
  const pi=section.querySelector('.mobile-pi');pi.style.transform=reducedLiveMotion.matches?'none':`translate3d(0,${32-progress*70}%,0)`;
  section.querySelectorAll('.mobile-capability').forEach((card,i)=>{
