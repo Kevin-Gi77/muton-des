@@ -14,7 +14,7 @@ const brandLogoData='data:image/webp;base64,UklGRhYLAABXRUJQVlA4TAkLAAAvtsQkEIcg
 const B='#0000e0', L='#0000f0', G='#60f030', W='#f0f0f0', M='#909090', K='#7e7e99';
 const brands=['中粮COFCO产业链好产品','东阿阿胶','usmile优选','BMW','康巴赫KONBACH','Midea','MI','DYESOO多燕瘦','周大生CHOW TAISENG','SENG森歌','NATUZZI EDITIONS','ninebot九号','transformers(变形金刚)','vatti华帝','ROBAM老板','RUMDOM朗通','福临门','ZOY中源家居','西湖安保XIHU SECURITY','金夫人','YAZAKI','箴芝堂','西湖投资XIHU INVESTMENT','山乘酿造SHENG CRAFT BEER','CSG科大智能','Casdon凯度','KUKA顾家家居','DE&E德意','SUPOR苏泊尔','BFB','MQ名气','AUPU奥普'];
 const jobs=[['2025—2026','BFB巴菲巴食品科技','品牌设计 / 电商视觉负责人'],['2022—2025','浙江思阳广告集团','资深设计师 → 视觉设计主管'],['2021—2022','杭州火石品牌策划','资深品牌设计师'],['2020—2021','杭州金夫人集团','平面 / 品牌设计师']];
-const caps=[['品牌视觉体系','BRAND SYSTEMS',['从品牌定位出发，','把标志、色彩与图形','连接成清晰、可延展的识别。'],'六段村 · 标志 / VI / 应用 ↗'],['商业视觉转化','COMMERCIAL VISUALS',['围绕产品与营销场景，','把主视觉、内容与直播','组织成一致的商业表达。'],'老板电器G30 · 新品上市 ↗'],['设计统筹管理','DESIGN MANAGEMENT',['亲自把握关键设计，','也用排期、审核与复盘，','让团队持续交付好作品。'],'思阳 · 团队与交付机制 ↗']];
+const caps=[['品牌视觉体系','BRAND SYSTEMS',['从品牌定位出发，','把标志、色彩与图形','连接成清晰、可延展的识别。'],'六段村 · 标志 / VI / 应用 ↗'],['商业视觉转化','COMMERCIAL VISUALS',['围绕产品与营销场景，','把主视觉、内容与直播','组织成一致的商业表达。'],'老板电器G30 · 新品上市 ↗'],['设计统筹管理','DESIGN MANAGEMENT',['亲自把握关键设计，','也用排期、审核与复盘，','让团队持续交付好作品。'],'查看管理实践 ↗']];
 const specs=[
 [['固定导航','高 60px；聊聊合作：白色文字 + 绿色 ↘，点击前往联系页脚'],['MUTON.DES × 3','采用当前字标动画画面；三行错位铺开，位于前景主张后方'],['从品牌识别 / 到商业现场。','两行均 132px / 300；左侧约 40% 宽，下部约 1/3；白字压在蓝字前方'],['字标循环 · 收尾修订版','9.44 秒静默自动循环；无需移动鼠标；文字入场结束后背景持续流动'],['身份信息入场','右下信息统一左对齐至 x=1420；逐行从裁切区下方向上显现；保留当前入场次序'],['探索我的作品 / 背景小字','右下探索入口 22px；下方 Scroll down 去掉箭头并与入口左对齐；三处英文小字 16px，错峰逐字打出，完成后方块光标持续闪烁']],
 [['{ REAL SERVICE }','13px；居中，独立留白'],['三行中英文标题','统一 64px；三行居中；前半段随滚动逐词显现，中文完成后再整块显露 Logo'],['品牌 Logo','4 行 × 8 列，整体居中；圆形直径 124px，横向净距 56px、纵向净距 30px；继续下滑时整块淡入上移，静默40%、悬停100%']],
@@ -35,7 +35,7 @@ const copies=[
 'π 型能力\n有深度，也有连接。\n\n'+caps.map((c,i)=>'0'+(i+1)+' '+c[0]+' / '+c[1]+'\n'+c[2].join('\n')+'\n'+c[3]).join('\n\n'),
 "{ NEXT CHAPTER }\n回到顶部 ↑\n下一个项目。\n一起 开始 ↘\n期待品牌视觉与设计管理的工作机会，\n也欢迎品牌全案、商业视觉与产品设计合作。\nmuton2.45@gmail.com ↑\n复制邮箱\n© 2026 陈其林\n品牌视觉 / Design Lead\n联系索取简历 ↑\nLET’S TALK"
 ];
-let chapter=0, p=.65, running=false, raf=0, phone=2, expanded=-1, pointer={x:1570,y:240};
+let chapter=0, p=.65, running=false, raf=0, phone=3, expanded=-1, pointer={x:1570,y:240};
 const esc=s=>copyText(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 
 function wrapCopy(value,limit){
@@ -110,14 +110,16 @@ function detailSections(info,kind){
  const curated=kind==='live'?null:content.detailLayouts?.[info.uid];
  const sections=editorial?.sections||curated?.sections||[{title:kind==='live'?'直播画面':'作品展示',layout:kind==='live'?'portrait':'grid',items:info.media.map((_,i)=>i)}];
  const intro=editorial?.intro;
- const copy=(title,paragraphs=[])=>`<div class="md-editorial-copy"><h2>${esc(title)}</h2><div>${paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></div>`;
+ const copy=(title,paragraphs=[],section={})=>`<div class="md-editorial-copy ${section.step?'md-step-copy':''}">${section.step?`<div class="md-step-heading"><span class="md-step-number">${esc(section.step)}</span><span class="md-step-kicker">${esc(section.kicker)}</span><h2>${esc(section.headline||title)}</h2></div>`:`<h2>${esc(title)}</h2>`}<div>${paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></div>`;
  return (intro?`<section class="md-design-section md-editorial-intro">${copy(intro.title,intro.paragraphs)}</section>`:'')+sections.map(section=>{
+  if(section.callouts){const asset=info.media[section.items[0]];return `<section class="md-design-section md-live-analysis" data-layout="callouts">${copy(section.title,section.paragraphs)}<figure class="md-live-breakdown"><div class="md-live-board"><div class="md-live-device"><div class="md-live-device-screen">${mediaMarkup(asset,`data-media-index="${section.items[0]}"`)}</div></div><svg class="md-live-guides" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">${section.callouts.map((point,i)=>{const x=500+(point.x-.5)*330,y=60+point.y*880,end=point.side==='left'?280:720;return `<path d="M ${end} ${y} L ${x} ${y}"/><circle cx="${x}" cy="${y}" r="5"/>`;}).join('')}</svg>${section.callouts.map((point,i)=>`<div class="md-live-callout" data-side="${point.side}" style="--callout-top:${6+point.y*88}%"><span class="md-live-callout-no">${String(i+1).padStart(2,'0')}</span><strong>${esc(point.name)}</strong><p>${esc(point.purpose)}</p></div>`).join('')}</div><figcaption class="md-figure-note">${esc(section.caption||'标注依据完整成品画面整理，非原始分层文件。')}</figcaption></figure></section>`;}
   if(section.regions){const asset=info.media[section.items[0]];return `<section class="md-design-section" data-layout="analysis">${copy(section.title,section.paragraphs)}<figure class="md-screen-analysis"><div class="md-screen-map">${mediaMarkup(asset,`data-media-index="${section.items[0]}"`)}${section.regions.map(zone=>`<div class="md-zone" style="top:${zone.top}%;height:${zone.height}%"><span>${esc(zone.label)}</span></div>`).join('')}</div><figcaption class="md-figure-note">${esc(section.caption||'基于完整画面的区域分析')}</figcaption></figure></section>`;}
+  if(section.presentation){const media=section.items.map(index=>{const asset=info.media[index];return `<figure class="md-real-media" data-media-index="${index}">${mediaMarkup(asset,asset.type==='video'&&!asset.animated?'controls':'')}</figure>`;}).join('');return `<section class="md-design-section md-live-material" data-layout="live-material" data-presentation="${esc(section.presentation)}"><div class="md-section-media">${media}</div>${copy(section.title,section.paragraphs)}</section>`;}
   const media=section.items.map(index=>{
    const asset=info.media[index],width=asset.width||1600;
    return `<figure class="md-real-media" data-media-index="${index}" style="--source-width:${width}px">${mediaMarkup(asset,asset.type==='video'&&!asset.animated?'controls':'')}</figure>`;
   }).join('');
-  return `<section class="md-design-section" data-layout="${section.layout}">${copy(section.title,section.paragraphs)}${media?`<div class="md-section-media" style="--section-columns:${section.columns||2};--component-columns:${section.columns||3};--section-width:${section.maxWidth||(section.layout==='hero'?1600:1800)}px;--component-background:${section.background||'#e8e8e6'}">${media}</div>`:''}</section>`;
+  return `<section class="md-design-section" data-layout="${section.layout}">${copy(section.title,section.paragraphs,section)}${media?`<div class="md-section-media" style="--section-columns:${section.columns||2};--component-columns:${section.columns||3};--section-width:${section.maxWidth||(section.layout==='hero'?1600:1800)}px;--component-background:${section.background||'#e8e8e6'}">${media}</div>`:''}</section>`;
  }).join('');
 }
 const jobDescriptions=content.jobs.map(job=>job.paragraphs);
@@ -237,6 +239,7 @@ function works(){
 }
 
 const phoneNames=content.live.map(item=>item.title);
+const phoneCount=phoneNames.length,phoneCenter=Math.floor(phoneCount/2),phoneStep=Math.PI*2/phoneCount;
 const liveLayer=root.querySelector('#muton-live-layer');
 let rotation=0,turnRaf=0,turning=false,infoPhone=-1,phoneInfoTimer=0;
 const ease=t=>t*t*(3-2*t);
@@ -250,12 +253,12 @@ function positionPhones(){
  liveLayer.style.opacity=1-exit;
  liveLayer.style.transform=`translateY(${-exit*8}%)`;
  liveLayer.style.pointerEvents='none';
- const angle=rotation+(running?ease(clamp((p-.15)/.45))*Math.PI*2/5:0);
- const centered=((Math.round(2-angle/(Math.PI*2/5))%5)+5)%5;
+ const angle=rotation+(running?ease(clamp((p-.15)/.45))*phoneStep:0);
+ const centered=((Math.round(phoneCenter-angle/phoneStep)%phoneCount)+phoneCount)%phoneCount;
  const revealed=running?(p>=.60&&p<.85?centered:-1):infoPhone;
  phoneButtons.forEach((button,i)=>{
-  const theta=(i-2)*Math.PI*2/5+angle;
-  const slot=Math.atan2(Math.sin(theta),Math.cos(theta))/(Math.PI*2/5),distance=Math.abs(slot),scale=1-.13*distance;
+  const theta=(i-phoneCenter)*phoneStep+angle;
+  const slot=Math.atan2(Math.sin(theta),Math.cos(theta))/phoneStep,distance=Math.abs(slot),scale=1-.13*distance;
   const x=960+Math.sign(slot)*(Math.min(distance,1)*350+Math.max(distance-1,0)*320)*1.06,y=535+distance*15.9;
   button.style.setProperty('--phone-scale',scale);button.style.width=(742*9/19)*scale/1920*100+'%';button.style.height=742*scale/1080*100+'%';
   button.style.left=x/1920*100+'%';button.style.top=y/1080*100+'%';
@@ -279,7 +282,7 @@ function rotateTo(index){
  if(infoPhone===index)return;
  clearPhoneInfo();
  phone=index;
- const target=-(index-2)*Math.PI*2/5;
+ const target=-(index-phoneCenter)*phoneStep;
  const delta=Math.atan2(Math.sin(target-rotation),Math.cos(target-rotation));
  if(Math.abs(delta)<.001){revealPhoneInfo(index);return;}
  const from=rotation,start=performance.now();turning=true;
@@ -358,7 +361,7 @@ function capabilityScene(progress){
   const y=ys[i]-scroll;
   const a=ease(clamp((1080-y)/200))*ease(clamp((y+240)/220));
   out+=`<g data-capability="${i}" opacity="${a}" transform="translate(${xs[i]} ${y})" style="pointer-events:${a>0?'auto':'none'};paint-order:stroke;stroke:#000;stroke-width:1.2px;stroke-linejoin:round">`;
-  out+=text(0,0,'0'+(i+1)+' / '+c[0],24,M)+lines(0,72,c[2],50,W,66,'font-weight="300"')+`<a tabindex="${a>0?0:-1}" href="#${['/case/project/1','/case/project/23','/home/experience'][i]}" aria-label="${esc(c[3])}">${text(0,276,c[3],22,G)}</a>`+'</g>';
+  out+=text(0,0,'0'+(i+1)+' / '+c[0],24,M)+lines(0,72,c[2],50,W,66,'font-weight="300"')+`<a tabindex="${a>0?0:-1}" href="#${['/case/project/1','/case/project/23','/management'][i]}" aria-label="${esc(c[3])}">${text(0,276,c[3],22,G)}</a>`+'</g>';
  });
  return `<g clip-path="url(#m-window)">${out}</g>`;
 }
@@ -422,7 +425,7 @@ function save(){if(siteReady){persistRoute();return;}const state={modelContent:{
 function select(i){navigate('/home/'+sectionIds[i]);}
 
 root.querySelector('#muton-chapters').innerHTML=names.map((n,i)=>`<button type="button" class="btn" data-chapter="${i}" aria-pressed="${i===0}">${String(i+1).padStart(2,'0')} ${n}</button>`).join('');
-function stop(){if(running&&chapter===3){rotation+=ease(clamp((p-.15)/.45))*Math.PI*2/5;phone=((Math.round(2-rotation/(Math.PI*2/5))%5)+5)%5;}running=false;cancelAnimationFrame(raf);play.textContent=chapter===0?'重播加载与文字入场':'播放分镜';if(chapter===2)queueWorkFlow();}
+function stop(){if(running&&chapter===3){rotation+=ease(clamp((p-.15)/.45))*phoneStep;phone=((Math.round(phoneCenter-rotation/phoneStep)%phoneCount)+phoneCount)%phoneCount;}running=false;cancelAnimationFrame(raf);play.textContent=chapter===0?'重播加载与文字入场':'播放分镜';if(chapter===2)queueWorkFlow();}
 root.querySelector('#muton-chapters').addEventListener('click',e=>{const b=e.target.closest('[data-chapter]');if(b){stop();select(Number(b.dataset.chapter));save();}});
 range.addEventListener('input',()=>{stop();p=Number(range.value)/100;draw();});range.addEventListener('change',save);
 play.addEventListener('click',()=>{if(running){stop();save();return;}clearPhoneInfo();cancelAnimationFrame(turnRaf);turning=false;running=true;play.textContent='暂停';p=0;resetWorkFlow();restartTitle();if(chapter===0){motion.pause();motion.currentTime=0;motionQueued=true;}let start=performance.now();const duration=chapter===6?16000:chapter===3?10000:chapter===1?8500:6500;const tick=t=>{p=clamp((t-start)/duration);range.value=Math.round(p*100);draw();if(p<1&&running)raf=requestAnimationFrame(tick);else{stop();save();}};raf=requestAnimationFrame(tick);});
@@ -437,13 +440,13 @@ let projectMode=false,projectCategory='全部',projectQuery='',projectSelected=1
 const projectTab=document.createElement('button');projectTab.type='button';projectTab.className='btn';projectTab.textContent='项目二级页';projectTab.setAttribute('aria-pressed','false');root.querySelector('#muton-chapters').append(projectTab);
 root.querySelector('#muton-project-categories').innerHTML=projectCategories.map(([name,count])=>`<button type="button" class="cursor-interaction" data-project-category="${name}" aria-pressed="${name==='全部'}">${name==='景观小品和文化墙'?'景观小品 / 文化墙':name}<sup>${count}</sup></button>`).join('');
 function projectEntries(){
- const loading=chapter===0&&p*6.5<1.45&&!projectMode&&!livePageMode&&!detailMode&&!menuOpen;
+ const loading=chapter===0&&p*6.5<1.45&&!projectMode&&!livePageMode&&!detailMode&&!menuOpen&&!managementMode;
  projectEntry.hidden=loading;
  root.querySelector('#muton-live-entry').hidden=loading;
  root.querySelector('#muton-menu-entry').hidden=loading;
  root.querySelector('#muton-contact-entry').hidden=loading;
- allProjectsEntry.hidden=projectMode||livePageMode||detailMode||menuOpen||chapter!==2;
- root.querySelector('#muton-all-live').hidden=projectMode||livePageMode||detailMode||menuOpen||chapter!==3||p>=.85;
+ allProjectsEntry.hidden=managementMode||projectMode||livePageMode||detailMode||menuOpen||chapter!==2;
+ root.querySelector('#muton-all-live').hidden=managementMode||projectMode||livePageMode||detailMode||menuOpen||chapter!==3||p>=.85;
  root.querySelector('#muton-home-entry').hidden=loading;
 }
 function leaveProjects(){
@@ -730,7 +733,7 @@ function openMenu(){
  if(menuOpen)return;
  clearArchiveFocus();
  stop();cancelAnimationFrame(workRaf);workRaf=0;clearPhoneInfo();cancelAnimationFrame(turnRaf);turning=false;
- if(chapter===3&&!projectMode&&!livePageMode&&!detailMode){rotation=-(phone-2)*Math.PI*2/5;positionPhones();}
+ if(chapter===3&&!projectMode&&!livePageMode&&!detailMode){rotation=-(phone-phoneCenter)*phoneStep;positionPhones();}
  menuMeta={specs:root.querySelector('#muton-specs').innerHTML,copy:root.querySelector('#muton-copy').textContent,state:root.querySelector('#muton-state').textContent};
  menuOpen=true;menu.hidden=false;document.body.classList.add('menu-open');setBackgroundInert(true);root.querySelector('.muton-product').classList.add('menu-mode');root.querySelector('.viz-controls').hidden=true;
  menuEntry.setAttribute('aria-expanded','true');menuEntry.setAttribute('aria-label','关闭菜单');menuTab.setAttribute('aria-pressed','true');projectEntries();
@@ -741,7 +744,7 @@ function openMenu(){
 }
 function closeMenu(returnFocus=true){
  if(!menuOpen)return;
- menuOpen=false;menu.hidden=true;document.body.classList.remove('menu-open');setBackgroundInert(false);root.querySelector('.muton-product').classList.remove('menu-mode');root.querySelector('.viz-controls').hidden=projectMode||livePageMode||detailMode;
+ menuOpen=false;menu.hidden=true;document.body.classList.remove('menu-open');setBackgroundInert(false);root.querySelector('.muton-product').classList.remove('menu-mode');root.querySelector('.viz-controls').hidden=projectMode||livePageMode||detailMode||managementMode;
  menuEntry.setAttribute('aria-expanded','false');menuEntry.setAttribute('aria-label','打开菜单');menuTab.setAttribute('aria-pressed','false');
  if(menuMeta){root.querySelector('#muton-specs').innerHTML=menuMeta.specs;root.querySelector('#muton-copy').textContent=menuMeta.copy;root.querySelector('#muton-state').textContent=menuMeta.state;}
  projectEntries();if(returnFocus){menuEntry.focus({preventScroll:true});if(chapter===3&&!projectMode&&!livePageMode&&!detailMode)revealPhoneInfo(phone);}
@@ -833,7 +836,7 @@ reducedLiveMotion.addEventListener('change',runDetailWave);
 
 function detailInfo(kind,index){
  const item=kind==='live'?content.live[index-1]:projects[kind==='work'?content.featured[index-1]-1:index-1];
- return {...item,count:kind==='live'?5:kind==='work'?12:projects.length};
+ return {...item,count:kind==='live'?content.live.length:kind==='work'?12:projects.length};
 }
 
 function leaveDetail(){
@@ -867,7 +870,7 @@ function showDetail(kind='project',index=1,delay=0){
  detailPage.querySelector('.md-endnote>span').textContent='MUTON.DES / '+info.category;
  detailScroll.scrollTop=0;
  revealDetail(info,kind,index,delay);
- root.querySelector('#muton-specs').innerHTML=[['封面首屏','统一加载 → 黑底与偏右封面揭开 → 左下标题与简介错峰入场；向下滚动再看具体作品'],['封面动态','沿用入口的同一案例封面；画面与边缘持续轻微波浪形变，文字独立保持稳定；减少动态模式显示静态封面'],['作品区域','逐项目分段：主视觉、效果图组合、组件板与限宽长图；完整保留图片比例'],['案例入口','项目索引中的 67 个案例、首页 12 个精选作品与 5 个精选直播接入同一模板'],['内容状态','已接入真实素材；首页精选、项目索引与详情共享项目记录。未核实字段不公开展示'],['浏览结束','回到顶部、返回来源页面、查看同组下一个案例']].map(row=>`<tr><th scope="row">${esc(row[0])}</th><td>${esc(row[1])}</td></tr>`).join('');
+ root.querySelector('#muton-specs').innerHTML=[['封面首屏','统一加载 → 黑底与偏右封面揭开 → 左下标题与简介错峰入场；向下滚动再看具体作品'],['封面动态','沿用入口的同一案例封面；画面与边缘持续轻微波浪形变，文字独立保持稳定；减少动态模式显示静态封面'],['作品区域','逐项目分段：主视觉、效果图组合、组件板与限宽长图；完整保留图片比例'],['案例入口','项目索引中的 67 个案例、首页 12 个精选作品与 7 个精选直播接入同一模板'],['内容状态','已接入真实素材；首页精选、项目索引与详情共享项目记录。未核实字段不公开展示'],['浏览结束','回到顶部、返回来源页面、查看同组下一个案例']].map(row=>`<tr><th scope="row">${esc(row[0])}</th><td>${esc(row[1])}</td></tr>`).join('');
  root.querySelector('#muton-copy').textContent=detailScroll.textContent;root.querySelector('#muton-state').textContent='案例三级页 · '+info.title+' · 在画面内向下滚动查看完整模板';
 }
 function openDetail(kind,index){navigate('/case/'+kind+'/'+index);}
@@ -882,7 +885,7 @@ detailScroll.addEventListener('scroll',()=>{clearTimeout(detailSaveTimer);detail
 root.addEventListener('click',event=>{const work=event.target.closest('[data-detail-work]');if(work)openDetail('work',Number(work.dataset.detailWork));});
 root.addEventListener('keydown',event=>{const work=event.target.closest('[data-detail-work]');if(work&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openDetail('work',Number(work.dataset.detailWork));}});
 
-function restore(state){const v=state?.privateContent;if(v?.detailRevision!==2){select(0);return;}if(v&&Number.isInteger(v.chapter)&&v.chapter>=0&&v.chapter<8){p=v.chapter===6&&v.capabilityRevision!==2?.24:clamp(Number(v.p)||0);phone=Number.isInteger(v.phone)?clamp(v.phone,0,4):2;select(v.chapter,true);if(v.detailMode){const kind=['project','work','live'].includes(v.detailKind)?v.detailKind:'project';const limit=kind==='live'?5:kind==='work'?12:67;const index=Math.min(limit,Math.max(1,Number(v.detailIndex)||1));detailSourceProgress=Number(v.detailSourceProgress)||0;detailSourceScroll=Number(v.detailSourceScroll)||0;showDetail(kind,index);detailScroll.scrollTop=Number(v.detailScrollTop)||0;}else if(v.projectMode){projectCategory=projectCategories.some(c=>c[0]===v.projectCategory)?v.projectCategory:'全部';projectQuery=typeof v.projectQuery==='string'?v.projectQuery:'';projectSelected=Number.isInteger(v.projectSelected)?v.projectSelected:1;showProjectPage();}else if(v.livePageMode){showLivePage();liveScroll.scrollTop=v.liveRevision===8?Number(v.liveScrollTop)||0:0;}if(v.menuOpen)openMenu();}else{select(0);showDetail('project',1);}}
+function restore(state){const v=state?.privateContent;if(v?.detailRevision!==2){select(0);return;}if(v&&Number.isInteger(v.chapter)&&v.chapter>=0&&v.chapter<8){p=v.chapter===6&&v.capabilityRevision!==2?.24:clamp(Number(v.p)||0);phone=Number.isInteger(v.phone)?clamp(v.phone,0,phoneCount-1):phoneCenter;select(v.chapter,true);if(v.detailMode){const kind=['project','work','live'].includes(v.detailKind)?v.detailKind:'project';const limit=kind==='live'?content.live.length:kind==='work'?12:67;const index=Math.min(limit,Math.max(1,Number(v.detailIndex)||1));detailSourceProgress=Number(v.detailSourceProgress)||0;detailSourceScroll=Number(v.detailSourceScroll)||0;showDetail(kind,index);detailScroll.scrollTop=Number(v.detailScrollTop)||0;}else if(v.projectMode){projectCategory=projectCategories.some(c=>c[0]===v.projectCategory)?v.projectCategory:'全部';projectQuery=typeof v.projectQuery==='string'?v.projectQuery:'';projectSelected=Number.isInteger(v.projectSelected)?v.projectSelected:1;showProjectPage();}else if(v.livePageMode){showLivePage();liveScroll.scrollTop=v.liveRevision===8?Number(v.liveScrollTop)||0:0;}if(v.menuOpen)openMenu();}else{select(0);showDetail('project',1);}}
 
 const assemblyScreen=root.querySelector('.ml-assembly-phone .ml-device-screen');
 assemblyScreen.innerHTML=content.assembly.map((asset,i)=>`<img class="stage-screen-media assembly-slide ${i===0?'is-current':''}" data-media-src="${asset.preview||asset.src}" alt="${esc(asset.label)}">`).join('');
@@ -1130,7 +1133,7 @@ const sectionTitleTimes=Array(8).fill(-10000);
 const sectionIds=['top','services','works','live','about','experience','capabilities','contact'];
 const product=root.querySelector('.muton-product');
 const mobile=matchMedia('(max-width:700px)');
-let siteReady=false,routeApplying=false,scrollFrame=0,loadingFrame=0;
+let siteReady=false,routeApplying=false,scrollFrame=0,loadingFrame=0,managementMode=false;
 let currentRoute='/home/top',homePosition=0;
 const home=document.createElement('main');home.id='home-flow';home.setAttribute('aria-label','陈其林的作品与经历');
 product.prepend(home);
@@ -1151,6 +1154,9 @@ root.querySelector('#muton-contact-entry').innerHTML='聊聊合作 <span aria-hi
 for(const [id,label]of [['project','项目'],['live','直播'],['menu','菜单']])root.querySelector('#muton-'+id+'-entry').textContent=label;
 const allWork=root.querySelector('#muton-all-projects'),allLive=root.querySelector('#muton-all-live');
 product.append(allWork,allLive);
+const managementPage=document.createElement('iframe');managementPage.id='muton-management-page';managementPage.title='设计统筹管理';managementPage.hidden=true;product.append(managementPage);
+function leaveManagementPage(){managementMode=false;managementPage.hidden=true;document.body.classList.remove('management-open');}
+function showManagementPage(){leaveDetail();leaveProjects();leaveLivePage();managementMode=true;managementPage.hidden=false;if(!managementPage.src)managementPage.src='management-v2.html?embed=1&v=20261015-release#/management';else managementPage.contentWindow?.scrollTo({top:0,behavior:'instant'});motion.pause();motion.hidden=true;liveLayer.hidden=true;svg.style.visibility='hidden';root.querySelector('.viz-controls').hidden=true;document.body.classList.add('management-open');projectEntries();}
 allWork.textContent='SEE ALL PROJECTS →';allLive.textContent='SEE ALL LIVE SCENES →';
 const progress=document.createElement('div');progress.id='reading-progress';progress.setAttribute('aria-hidden','true');document.body.append(progress);
 const horizontalProgress=document.createElement('div');horizontalProgress.id='reading-progress-bottom';horizontalProgress.setAttribute('aria-hidden','true');horizontalProgress.innerHTML='<span></span>';document.body.append(horizontalProgress);
@@ -1167,7 +1173,7 @@ const mobileBody=(i)=>{
  if(i===3)return `<div class="mobile-live-pin"><h2 class="section-kicker">{ 全场景直播视觉方案 }</h2><div class="mobile-phones">${content.live.map((a,i)=>`<a href="#/case/live/${i+1}"><div class="mobile-device">${mediaMarkup(a.cover,'class="stage-screen-media"')}</div><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p></a>`).join('')}</div><a class="outline-link" href="#/live">SEE ALL LIVE SCENES →</a><div class="mobile-behind"><div class="mobile-behind-curtain"><span>BEHIND<br>THE WORK</span></div></div></div>`;
  if(i===4)return `<p class="section-kicker">{ ABOUT ME }</p><img class="mobile-portrait" data-media-src="${content.portrait.src}" alt="陈其林个人照片"><h2>亲自设计<br>也让好的设计<br>持续发生。</h2><p>在品牌策划公司、广告集团与消费品牌甲方积累经验，将品牌识别、内容传播和商业场景连接起来。</p><p>亲自做好关键设计，也让团队的交付持续向前。</p><div class="mobile-stats"><p>2020—2026<small>品牌与商业视觉实践</small></p><p>杭州<small>品牌视觉 · 设计统筹</small></p></div>`;
  if(i===5)return `<h2>工作路径</h2><p class="section-kicker">EXPERIENCE / 2020–2026</p>${content.jobs.map((job,i)=>`<details><summary><small>${esc(job.years)}</small><span>${esc(job.company)}</span><small>${esc(jobs[i][2])}</small></summary>${job.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</details>`).join('')}`;
- if(i===6)return `<div class="mobile-capability-pin"><h2>${['π 型能力','有深度，也有连接。'].map(row=>`<span class="capability-title-line">${[...row].map(char=>`<span data-capability-letter>${esc(char)}</span>`).join('')}</span>`).join('')}</h2><img class="mobile-pi" data-media-src="assets/web/capability-pi.webp" width="768" height="900" alt="" aria-hidden="true">${caps.map((c,i)=>`<div class="mobile-capability"><p>0${i+1} / ${esc(c[0])}</p><h3>${c[2].map(esc).join('<br>')}</h3><a class="green" href="#${['/case/project/1','/case/project/23','/home/experience'][i]}">${esc(c[3])}</a></div>`).join('')}</div>`;
+ if(i===6)return `<div class="mobile-capability-pin"><h2>${['π 型能力','有深度，也有连接。'].map(row=>`<span class="capability-title-line">${[...row].map(char=>`<span data-capability-letter>${esc(char)}</span>`).join('')}</span>`).join('')}</h2><img class="mobile-pi" data-media-src="assets/web/capability-pi.webp" width="768" height="900" alt="" aria-hidden="true">${caps.map((c,i)=>`<div class="mobile-capability"><p>0${i+1} / ${esc(c[0])}</p><h3>${c[2].map(esc).join('<br>')}</h3><a class="green" href="#${['/case/project/1','/case/project/23','/management'][i]}">${esc(c[3])}</a></div>`).join('')}</div>`;
  return `<p class="section-kicker">{ NEXT CHAPTER }</p><a href="#/home/top" class="mobile-top">回到顶部 ↑</a><h2>下一个项目。</h2><a class="contact-start" href="mailto:muton2.45@gmail.com">一起 <span class="green">开始 ↘</span></a><p class="contact-description">期待品牌视觉与设计管理的工作机会，<br>也欢迎品牌全案、商业视觉与产品设计合作。</p><a class="contact-line" href="tel:17729854302"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">${contactIcon('phone')}</svg>17729854302</a><a class="contact-line" href="mailto:muton2.45@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">${contactIcon('email')}</svg>muton2.45@gmail.com</a><button data-copy-email>复制邮箱</button><p class="mobile-copyright">© 2026 陈其林<br>品牌视觉 / Design Lead</p><div class="contact-qrs"><figure><img data-media-src="assets/contact-wechat.png" alt="联系微信二维码"><figcaption>联系微信</figcaption></figure><figure><img data-media-src="assets/contact-zcool.png" alt="站酷首页二维码"><figcaption>站酷首页</figcaption></figure></div><div class="mobile-talk" aria-hidden="true">LET’S TALK</div>`;
 };
 sections.forEach(({section},i)=>{const body=document.createElement('div');body.className='mobile-content';body.innerHTML=mobileBody(i);section.append(body);});
@@ -1176,7 +1182,7 @@ sections[0].scene.insertAdjacentHTML('beforeend','<a class="hero-work-hit" href=
 sections[7].scene.insertAdjacentHTML('beforeend',`<a class="footer-hit footer-top" href="#/home/top" aria-label="回到顶部"></a><a class="footer-hit footer-email" href="mailto:muton2.45@gmail.com" aria-label="发送邮件"></a><a class="footer-hit footer-start" href="mailto:muton2.45@gmail.com" aria-label="聊聊下一个项目"></a><button class="footer-hit footer-copy" data-copy-email aria-label="复制邮箱"></button><a class="footer-hit footer-phone" href="tel:17729854302" aria-label="拨打电话 17729854302"></a>`);
 
 function setBackgroundInert(value){
- for(const el of [home,projectPage,livePage,detailPage])el.inert=value;
+ for(const el of [home,projectPage,livePage,detailPage,managementPage])el.inert=value;
 }
 function activeScroller(){return detailMode?detailScroll:livePageMode?liveScroll:projectMode?projectList:document.scrollingElement;}
 function updateProgress(){
@@ -1211,9 +1217,9 @@ function notifyAnalytics(){
 }
 function applyRoute(path,restorePosition=false){
  clearTimeout(routeSaveTimer);
- routeApplying=true;cancelAnimationFrame(loadingFrame);closeMenu(false);stop();
+ routeApplying=true;cancelAnimationFrame(loadingFrame);closeMenu(false);stop();leaveManagementPage();
  const state=history.state||{},parts=path.split('/');
- if(parts[1]==='case'&&!(['project','work','live'].includes(parts[2])&&/^\d+$/.test(parts[3])&&Number(parts[3])>=1&&Number(parts[3])<=(parts[2]==='project'?67:parts[2]==='work'?12:5))){path='/projects';history.replaceState({...state,route:path},'','#'+path);}
+ if(parts[1]==='case'&&!(['project','work','live'].includes(parts[2])&&/^\d+$/.test(parts[3])&&Number(parts[3])>=1&&Number(parts[3])<=(parts[2]==='project'?67:parts[2]==='work'?12:content.live.length))){path='/projects';history.replaceState({...state,route:path},'','#'+path);}
  currentRoute=path;
  const isHome=path.startsWith('/home/');
  document.body.classList.toggle('subpage-open',!isHome);
@@ -1228,7 +1234,8 @@ function applyRoute(path,restorePosition=false){
  }else{
   window.scrollTo({top:0,behavior:'instant'});
   const show=()=>{
-   if(path==='/projects'){
+   if(path==='/management'){showManagementPage();document.title='设计统筹管理 · MUTON.DES';}
+   else if(path==='/projects'){
     projectCategory=state.category||'全部';projectQuery=state.query||'';projectSelected=state.selected||1;showProjectPage();document.title='项目 · MUTON.DES';
    }else if(path==='/live'){showLivePage(reducedLiveMotion.matches||restorePosition?0:pageLoadDuration*1000);document.title='直播视觉 · MUTON.DES';}
    else if(path.startsWith('/case/')){showDetail(parts[2],Number(parts[3]),reducedLiveMotion.matches||restorePosition?0:pageLoadDuration*1000);document.title=detailInfo(parts[2],Number(parts[3])).title+' · MUTON.DES';}
@@ -1367,7 +1374,7 @@ root.addEventListener('click',event=>{
 });
 // Keep menu scroll locked and dialog focus contained, using the original Escape/Tab handling.
 const originalEntries=projectEntries;
-projectEntries=function(){originalEntries();if(siteReady){syncSectionLinks();navBar.hidden=!mobile.matches&&!projectMode&&!livePageMode&&!detailMode&&!menuOpen&&chapter===0&&p*6.5<1.45;navBar.querySelectorAll('button').forEach(b=>b.hidden=false);}};
+projectEntries=function(){originalEntries();if(siteReady){syncSectionLinks();navBar.hidden=!mobile.matches&&!projectMode&&!livePageMode&&!detailMode&&!menuOpen&&!managementMode&&chapter===0&&p*6.5<1.45;navBar.querySelectorAll('button').forEach(b=>b.hidden=false);}};
 history.scrollRestoration='manual';
 siteReady=true;sizeSections();
 const titleObserver=new IntersectionObserver(entries=>entries.forEach(({target,isIntersecting})=>{
